@@ -1,0 +1,368 @@
+/* --- Reset Geral --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Canvas do Telemóvel */
+.phone-canvas {
+    width: 360px;
+    height: 740px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Área de scroll para o conteúdo interior */
+.scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    padding-bottom: 80px; /* Espaço para a navbar não tapar o conteúdo */
+}
+
+/* Esconder a barra de scroll para parecer mais uma app nativa */
+.scroll-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- Cabeçalho --- */
+.header-container {
+    margin-bottom: 20px;
+}
+
+.logo-small {
+    height: 35px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.user-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-text h1 {
+    font-size: 1.6rem;
+    color: #111111;
+    font-weight: 700;
+}
+
+.welcome-text p {
+    font-size: 0.85rem;
+    color: #666666;
+    margin-top: 2px;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* --- Card Principal (Próxima Rota) --- */
+.main-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.card-image-wrapper {
+    width: 45%;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    width: 55%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.badge-route {
+    background-color: #e6f2ff;
+    color: #1e90ff;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.card-info h2 {
+    font-size: 1.15rem;
+    color: #111111;
+    margin: 8px 0;
+}
+
+.progress-container {
+    margin-bottom: 12px;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    color: #666666;
+    margin-bottom: 4px;
+}
+
+.steps-highlight {
+    color: #1e90ff;
+    font-weight: 700;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e6f2ff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #1e90ff;
+}
+
+.btn-continue {
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* --- Ações Rápidas --- */
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 10px 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.action-icon {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.green-icon { background: #e8f5e9; }
+.blue-icon { background: #e3f2fd; }
+.orange-icon { background: #fff3e0; }
+
+.action-text h3 {
+    font-size: 0.75rem;
+    color: #111111;
+    font-weight: 700;
+}
+
+.action-text p {
+    font-size: 0.65rem;
+    color: #888888;
+}
+
+/* --- Grid de Duas Colunas --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.grid-section h2 {
+    font-size: 0.95rem;
+    color: #111111;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.grid-card-content {
+    background: #ffffff;
+    border: 1px solid #f4f6f9;
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 160px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.item-icon {
+    font-size: 1.3rem;
+}
+
+.thumb-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.item-details h3 {
+    font-size: 0.75rem;
+    color: #222222;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.item-details p {
+    font-size: 0.65rem;
+    color: #888888;
+}
+
+.stat-highlight {
+    font-size: 1.1rem !important;
+    color: #ffb300 !important;
+    font-weight: 700 !important;
+}
+
+.sub-green { color: #4caf50 !important; }
+.status-done { color: #4caf50 !important; font-weight: 600; }
+.status-progress { color: #1e90ff !important; font-weight: 600; }
+.status-pending { color: #aaaaaa !important; }
+
+/* --- Secção de Emergência --- */
+.emergency-section {
+    margin-bottom: 10px;
+}
+
+.emergency-card {
+    background: #fff5f5;
+    border: 1.5px solid #ffccd0;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.emergency-icon {
+    font-size: 1.6rem;
+    background: #ffe3e5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emergency-body {
+    flex: 1;
+}
+
+.emergency-body p {
+    font-size: 0.75rem;
+    color: #333333;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.btn-emergency {
+    background-color: #e52424;
+    color: #ffffff;
+    border: none;
+    padding: 6px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+}
+
+/* --- Navbar Fixa Inferior --- */
+.bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background-color: #ffffff;
+    border-top: 1px solid #eeeeee;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 5px; /* Compensa a curvatura do telemóvel */
+}
+
+.nav-item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #888888;
+}
+
+.nav-icon {
+    font-size: 1.3rem;
+}
+
+.nav-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.nav-item.active {
+    color: #1e90ff;
+}
+
+.nav-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ddd;
+}

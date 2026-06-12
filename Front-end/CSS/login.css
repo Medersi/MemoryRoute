@@ -1,0 +1,133 @@
+/* --- Reset Geral --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Canvas do Telemóvel --- */
+.phone-canvas {
+    width: 360px; /* Largura padrão de um ecrã mobile comum */
+    height: 740px; /* Altura padrão */
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* --- Secção do Logótipo --- */
+.logo-container {
+    flex: 1; /* Ocupa o espaço proporcional superior */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.logo-img {
+    max-width: 80%;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+/* --- Card Azul de Login --- */
+.login-card {
+    background-color: #1e90ff; /* O tom de azul vibrante da imagem */
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 2.5; /* Ocupa a maior parte do ecrã vertical */
+}
+
+.login-card h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* --- Formulário e Inputs --- */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaçamento entre os inputs */
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 50px; /* Bordas arredondadas idênticas ao teu design */
+    font-size: 0.95rem;
+    color: #333333;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #999999;
+}
+
+/* --- Botão Login --- */
+.btn-login {
+    width: 100%;
+    padding: 16px;
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 3px solid #4caf50; /* A borda verde que tens no mockup */
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-login:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-login:active {
+    transform: scale(0.98);
+}
+
+/* --- Rodapé (Sign Up) --- */
+.form-footer {
+    margin-top: auto; /* Empurra o texto para o fundo do bloco azul */
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    gap: 8px;
+    padding-bottom: 10px;
+}
+
+.signup-link {
+    color: #ffb300; /* O tom de amarelo/laranja para o "Sign Up" */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}

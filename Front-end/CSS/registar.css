@@ -1,0 +1,125 @@
+/* --- Reset Geral --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Canvas do Telemóvel */
+.phone-canvas {
+    width: 360px;
+    height: 740px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Secção do Logótipo */
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+.logo-img {
+    max-width: 80%;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+/* Card Azul de Registo */
+.login-card {
+    background-color: #1e90ff;
+    border-top-left-radius: 35px;
+    border-top-right-radius: 35px;
+    padding: 35px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 2.8;
+}
+
+.login-card h2 {
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Formulário e Inputs */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    color: #333333;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #757575;
+}
+
+/* Botão Sign Up */
+.btn-register {
+    width: 100%;
+    padding: 16px;
+    margin-top: 15px;
+    background-color: #ffffff;
+    color: #333333;
+    border: 3px solid #4caf50;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-register:hover {
+    background-color: #f1f1f1;
+}
+
+/* Rodapé (Sign In) */
+.form-footer {
+    margin-top: auto;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    gap: 8px;
+    padding-bottom: 10px;
+}
+
+.signin-link {
+    color: #ffb300;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signin-link:hover {
+    text-decoration: underline;
+}

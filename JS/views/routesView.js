@@ -39,6 +39,7 @@ function routeCard(route, user, isFavorite) {
         route.origin && route.destination ? `${route.origin} → ${route.destination}` : "",
         route.durationMinutes ? `${route.durationMinutes} minutos` : ""
     ].filter(Boolean).join(" · ");
+    const startUrl = `explorar-rota.html?id=${encodeURIComponent(route.id)}${completed ? "&repeat=1" : ""}`;
 
     return `
         <article class="route-card">
@@ -48,7 +49,7 @@ function routeCard(route, user, isFavorite) {
                 <p>${escapeHtml(meta || route.description || "Percurso visual")}</p>
                 <span class="status ${info.className}">${info.label}</span>
                 <div class="route-actions">
-                    <a href="explorar-rota.html?id=${encodeURIComponent(route.id)}" class="route-start-button">${info.button}</a>
+                    <a href="${startUrl}" class="route-start-button">${info.button}</a>
                     <button type="button" class="favorite-button ${isFavorite ? "active" : ""}"
                         data-favorite-route-id="${escapeHtml(route.id)}"
                         aria-label="${isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}">

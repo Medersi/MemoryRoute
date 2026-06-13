@@ -13,13 +13,16 @@ import {
     showExploreMessage
 } from "../views/exploreRouteView.js";
 
-const routeId = new URLSearchParams(window.location.search).get("id");
+const searchParams = new URLSearchParams(window.location.search);
+const routeId = searchParams.get("id");
+const repeatRoute = searchParams.get("repeat") === "1";
 const sessionUser = storageService.getAuthenticatedUser();
 const elements = getExploreElements();
 
 let route;
 let steps = [];
 let currentIndex = 0;
+let isProcessing = false;
 
 async function initialize() {
     if (!sessionUser || !routeId) {
@@ -35,7 +38,7 @@ async function initialize() {
 
         route = new Route(routeData);
         steps = stepData
-            .map((step) => new RouteStep({ ...step, completed: false }))
+            .map((step) => new RouteStep(step))
             .sort((a, b) => a.order - b.order);
 
         if (!steps.length) {
@@ -44,6 +47,19 @@ async function initialize() {
             return;
         }
 
+        const alreadyCompleted = route.completedBy.includes(String(sessionUser.id));
+        if (alreadyCompleted && !repeatRoute) {
+            showCompletion(route.name, false, false);
+            return;
+        }
+
+        if (repeatRoute && steps.every((step) => step.completed)) {
+            steps.forEach((step) => step.reset());
+            await Promise.all(steps.map((step) => apiService.updateRouteStep(step.id, { completed: false })));
+        }
+
+        const firstIncompleteStep = steps.findIndex((step) => !step.completed);
+        currentIndex = firstIncompleteStep === -1 ? steps.length - 1 : firstIncompleteStep;
         renderCurrentStep();
     } catch {
         showExploreMessage("Não foi possível carregar esta rota. Confirma se o servidor está ativo.", "error");
@@ -56,9 +72,18 @@ function renderCurrentStep() {
     renderStep(route, steps[currentIndex], currentIndex, steps.length, progress);
 }
 
-async function completeCurrentStep() {
+function showPreviousStep() {
+    if (isProcessing || currentIndex === 0) return;
+    currentIndex -= 1;
     clearExploreMessage();
-    setStepButtonLoading(true);
+    renderCurrentStep();
+}
+
+async function completeCurrentStep() {
+    if (isProcessing) return;
+    isProcessing = true;
+    clearExploreMessage();
+    setStepButtonLoading(true, currentIndex > 0);
 
     try {
         const step = steps[currentIndex].markCompleted();
@@ -74,7 +99,8 @@ async function completeCurrentStep() {
     } catch {
         showExploreMessage("Não foi possível atualizar o progresso. Tenta novamente.", "error");
     } finally {
-        setStepButtonLoading(false);
+        isProcessing = false;
+        setStepButtonLoading(false, currentIndex > 0);
     }
 }
 
@@ -99,6 +125,7 @@ async function completeRoute() {
     storageService.saveAuthenticatedUser(user.toSessionData());
     const newlyUnlocked = await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
     const achievementUnlocked = newlyUnlocked.some((achievement) => achievement.name === "Primeira rota sozinho");
+    window.history.replaceState(null, "", `explorar-rota.html?id=${encodeURIComponent(route.id)}`);
     showCompletion(route.name, rewarded, achievementUnlocked);
 }
 
@@ -112,6 +139,7 @@ function requestHelp() {
     window.location.href = `tel:${contact.phone.replace(/\s+/g, "")}`;
 }
 
+elements.previousButton.addEventListener("click", showPreviousStep);
 elements.nextButton.addEventListener("click", completeCurrentStep);
 elements.helpButton.addEventListener("click", requestHelp);
 initialize();

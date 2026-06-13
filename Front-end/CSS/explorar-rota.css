@@ -124,6 +124,7 @@
 }
 
 .complete-step-button,
+.previous-step-button,
 .help-button {
     width: 100%;
     padding: 13px;
@@ -131,6 +132,17 @@
     cursor: pointer;
     font-size: 0.82rem;
     font-weight: 800;
+}
+
+.previous-step-button {
+    border: 1px solid #cfe8fb;
+    background: #eaf6ff;
+    color: #1e90ff;
+}
+
+.previous-step-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
 }
 
 .complete-step-button {

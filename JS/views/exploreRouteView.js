@@ -7,6 +7,7 @@ const elements = {
     counter: document.querySelector("[data-step-counter]"),
     progress: document.querySelector("[data-step-progress]"),
     message: document.querySelector("#explore-message"),
+    previousButton: document.querySelector("#previous-step-button"),
     nextButton: document.querySelector("#step-complete-button"),
     helpButton: document.querySelector("#help-button"),
     success: document.querySelector("#route-success")
@@ -21,6 +22,7 @@ export function renderStep(route, step, currentIndex, totalSteps, progress) {
     elements.counter.textContent = `Passo ${currentIndex + 1} de ${totalSteps}`;
     elements.progress.style.width = `${progress}%`;
     elements.progress.parentElement.setAttribute("aria-valuenow", String(progress));
+    elements.previousButton.disabled = currentIndex === 0;
 }
 
 export function showExploreMessage(message, type = "info") {
@@ -33,12 +35,14 @@ export function clearExploreMessage() {
     elements.message.hidden = true;
 }
 
-export function setStepButtonLoading(loading) {
+export function setStepButtonLoading(loading, canGoPrevious = false) {
     elements.nextButton.disabled = loading;
+    elements.previousButton.disabled = loading || !canGoPrevious;
     elements.nextButton.textContent = loading ? "A atualizar..." : "Já aqui estou";
 }
 
 export function showCompletion(routeName, rewarded, achievementUnlocked) {
+    elements.routeTitle.textContent = routeName;
     elements.content.hidden = true;
     elements.success.hidden = false;
     document.querySelector("[data-success-title]").textContent = `${routeName} concluída!`;

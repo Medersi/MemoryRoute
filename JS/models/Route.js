@@ -2,16 +2,23 @@ export class Route {
     constructor({
         id = null,
         name,
+        origin = "",
+        destination = "",
         description = "",
+        mainImage = "",
         distanceKm = 0,
         durationMinutes = 0,
         difficulty = "fácil",
         ownerId = null,
-        status = "saved"
+        createdBy = null,
+        userId = null,
+        status = "saved",
+        completedBy = []
     }) {
         Object.assign(this, {
-            id, name, description, distanceKm, durationMinutes,
-            difficulty, ownerId, status
+            id, name, origin, destination, description, mainImage,
+            distanceKm, durationMinutes, difficulty, ownerId, createdBy,
+            userId, status, completedBy
         });
     }
 
@@ -24,5 +31,19 @@ export class Route {
     markCompleted() {
         this.status = "completed";
         return this;
+    }
+
+    markCompletedBy(userId) {
+        const normalizedId = String(userId);
+        if (!this.completedBy.includes(normalizedId)) {
+            this.completedBy.push(normalizedId);
+        }
+        return this;
+    }
+
+    toApiData() {
+        const data = { ...this };
+        if (data.id === null) delete data.id;
+        return data;
     }
 }

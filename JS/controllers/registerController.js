@@ -12,9 +12,9 @@ form.addEventListener("submit", async (event) => {
 
     try {
         await authService.register({
-            name: form.name.value.trim(),
-            email: form.email.value,
-            password: form.password.value
+            name: form.elements.namedItem("name").value.trim(),
+            email: form.elements.namedItem("email").value,
+            password: form.elements.namedItem("password").value
         });
         showMessage(message, "Conta criada com sucesso. A redirecionar...", "success");
         setTimeout(() => window.location.replace("login.html"), 900);

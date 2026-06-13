@@ -6,5 +6,4 @@ if (user) {
     const firstName = user.name.split(" ")[0];
     document.querySelector("[data-home-greeting]").textContent = `Olá, ${firstName}`;
     document.querySelector("[data-home-avatar]").textContent = firstName[0].toUpperCase();
-    document.querySelector("[data-home-coins]").textContent = user.coins;
 }

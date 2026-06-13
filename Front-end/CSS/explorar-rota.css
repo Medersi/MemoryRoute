@@ -1,0 +1,214 @@
+@import url("app-base.css");
+
+.explore-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+}
+
+.explore-header {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 12px;
+}
+
+.explore-header h1 {
+    font-size: 1.25rem;
+}
+
+.back-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #e3e9ef;
+    border-radius: 13px;
+    background: #fff;
+    color: #1e90ff;
+    font-size: 1.8rem;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.step-image-wrapper {
+    display: grid;
+    height: 250px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    place-items: center;
+    border-radius: 22px;
+    background: linear-gradient(145deg, #dff1ff, #eef8ff);
+}
+
+.step-image {
+    width: 70%;
+    max-height: 75%;
+    object-fit: contain;
+}
+
+.step-progress-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.72rem;
+}
+
+.step-progress-row span {
+    color: #818b96;
+}
+
+.explore-progress {
+    height: 8px;
+    margin: 8px 0 18px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e4eef6;
+}
+
+.explore-progress div {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: #1e90ff;
+    transition: width 0.25s ease;
+}
+
+.instruction-card {
+    margin-bottom: 14px;
+    padding: 18px;
+    border: 1px solid #e7edf2;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 5px 16px rgba(32, 54, 76, 0.05);
+}
+
+.instruction-label {
+    color: #1e90ff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.instruction-card h2 {
+    margin: 6px 0;
+    font-size: 1.1rem;
+}
+
+.instruction-card p {
+    color: #66717d;
+    font-size: 0.85rem;
+    line-height: 1.45;
+}
+
+.explore-message {
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 12px;
+    background: #eaf6ff;
+    color: #176da8;
+    font-size: 0.72rem;
+    text-align: center;
+}
+
+.explore-message.error {
+    background: #fff0f0;
+    color: #b93636;
+}
+
+.explore-actions {
+    display: grid;
+    gap: 9px;
+}
+
+.complete-step-button,
+.help-button {
+    width: 100%;
+    padding: 13px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.complete-step-button {
+    border: 0;
+    background: #1e90ff;
+    color: #fff;
+}
+
+.complete-step-button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.help-button {
+    border: 1px solid #ffd0d0;
+    background: #fff5f5;
+    color: #d94343;
+}
+
+.success-card {
+    margin-top: 65px;
+    padding: 25px 18px;
+    border: 1px solid #e3eee5;
+    border-radius: 22px;
+    background: #fff;
+    text-align: center;
+}
+
+.success-icon {
+    display: grid;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e4f7e8;
+    color: #3aa75b;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.success-card h2 {
+    margin-bottom: 8px;
+    font-size: 1.25rem;
+}
+
+.success-card > p:not(.eyebrow):not(.achievement-message) {
+    color: #69747f;
+    font-size: 0.78rem;
+}
+
+.achievement-message {
+    margin: 14px 0;
+    padding: 9px;
+    border-radius: 12px;
+    background: #fff3d9;
+    color: #a36d00;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.success-primary,
+.success-secondary {
+    display: block;
+    margin-top: 9px;
+    padding: 11px;
+    border-radius: 13px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.success-primary {
+    background: #1e90ff;
+    color: #fff;
+}
+
+.success-secondary {
+    border: 1px solid #dfe6ec;
+    color: #65717c;
+}

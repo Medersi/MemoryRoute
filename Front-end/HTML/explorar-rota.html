@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Explorar rota</title>
+    <link rel="stylesheet" href="../CSS/explorar-rota.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="explore-content">
+            <header class="explore-header">
+                <a href="rotas.html" class="back-button" aria-label="Voltar às rotas">‹</a>
+                <div>
+                    <p class="eyebrow">Modo Explorador</p>
+                    <h1 data-route-title>A carregar rota...</h1>
+                </div>
+            </header>
+
+            <section id="explore-content">
+                <div class="step-image-wrapper">
+                    <img src="logo.png" alt="" class="step-image" data-step-image>
+                </div>
+
+                <div class="step-progress-row">
+                    <strong data-step-counter>Passo 1 de 1</strong>
+                    <span>Segue com calma</span>
+                </div>
+                <div class="explore-progress" role="progressbar" aria-label="Progresso da rota" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div data-step-progress></div>
+                </div>
+
+                <section class="instruction-card">
+                    <span class="instruction-label">Próxima indicação</span>
+                    <h2 data-step-title>Primeiro passo</h2>
+                    <p data-step-instruction>A carregar instrução...</p>
+                </section>
+
+                <p id="explore-message" class="explore-message" role="alert" hidden></p>
+
+                <div class="explore-actions">
+                    <button type="button" class="complete-step-button" id="step-complete-button">Já aqui estou</button>
+                    <button type="button" class="help-button" id="help-button">Preciso de ajuda</button>
+                </div>
+            </section>
+
+            <section class="success-card" id="route-success" hidden>
+                <div class="success-icon">✓</div>
+                <p class="eyebrow">Percurso terminado</p>
+                <h2 data-success-title>Rota concluída!</h2>
+                <p data-success-reward>Ganhaste 20 moedas de autonomia.</p>
+                <p class="achievement-message" data-success-achievement>Conquista desbloqueada: Primeira rota sozinho</p>
+                <a href="conquistas.html" class="success-primary">Ver conquistas</a>
+                <a href="rotas.html" class="success-secondary">Voltar às rotas</a>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/exploreRouteController.js"></script>
+</body>
+</html>

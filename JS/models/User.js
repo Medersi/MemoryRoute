@@ -8,6 +8,7 @@ export class User {
         coins = 0,
         level = 1,
         emergencyContact = null,
+        completedRouteIds = [],
         createdAt = new Date().toISOString()
     }) {
         this.id = id;
@@ -18,6 +19,7 @@ export class User {
         this.coins = coins;
         this.level = level;
         this.emergencyContact = emergencyContact;
+        this.completedRouteIds = completedRouteIds.map(String);
         this.createdAt = createdAt;
     }
 
@@ -32,6 +34,19 @@ export class User {
 
     isAdmin() {
         return this.role === "admin";
+    }
+
+    hasCompletedRoute(routeId) {
+        return this.completedRouteIds.includes(String(routeId));
+    }
+
+    completeRoute(routeId, reward = 20) {
+        const normalizedId = String(routeId);
+        if (this.hasCompletedRoute(normalizedId)) return false;
+
+        this.completedRouteIds.push(normalizedId);
+        this.addCoins(reward);
+        return true;
     }
 
     toSessionData() {

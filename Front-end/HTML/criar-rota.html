@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Criar caminho</title>
+    <link rel="stylesheet" href="../CSS/criar-rota.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="builder-content">
+            <header class="builder-header">
+                <a href="rotas.html" class="back-button" aria-label="Voltar às rotas">‹</a>
+                <div>
+                    <p class="eyebrow">Construtor de Caminhos</p>
+                    <h1>Criar rota visual</h1>
+                </div>
+            </header>
+
+            <form id="create-route-form">
+                <section class="builder-section">
+                    <h2>Informações da rota</h2>
+
+                    <label class="field-label" for="route-name">Nome da rota *</label>
+                    <input id="route-name" name="name" type="text" placeholder="Ex.: Caminho casa-escola" required>
+
+                    <div class="two-fields">
+                        <div>
+                            <label class="field-label" for="route-origin">Origem</label>
+                            <input id="route-origin" name="origin" type="text" placeholder="Casa">
+                        </div>
+                        <div>
+                            <label class="field-label" for="route-destination">Destino *</label>
+                            <input id="route-destination" name="destination" type="text" placeholder="Escola" required>
+                        </div>
+                    </div>
+
+                    <label class="field-label" for="route-description">Descrição</label>
+                    <textarea id="route-description" name="description" rows="3" placeholder="Uma breve explicação do percurso"></textarea>
+
+                    <div class="two-fields">
+                        <div>
+                            <label class="field-label" for="route-duration">Duração estimada</label>
+                            <input id="route-duration" name="duration" type="number" min="1" placeholder="Minutos">
+                        </div>
+                        <div>
+                            <label class="field-label" for="route-difficulty">Dificuldade</label>
+                            <select id="route-difficulty" name="difficulty">
+                                <option value="fácil">Fácil</option>
+                                <option value="média">Média</option>
+                                <option value="difícil">Difícil</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label class="field-label" for="route-main-image">Imagem principal opcional</label>
+                    <label class="image-picker main-image-picker" for="route-main-image">
+                        <span id="main-image-placeholder">Adicionar fotografia da rota</span>
+                        <img id="main-image-preview" alt="Pré-visualização da rota" hidden>
+                    </label>
+                    <input id="route-main-image" class="file-input" type="file" accept="image/*">
+                </section>
+
+                <section class="builder-section">
+                    <div class="section-heading">
+                        <div>
+                            <h2>Passos do caminho</h2>
+                            <p>Adiciona fotografias e indicações pela ordem correta.</p>
+                        </div>
+                        <button type="button" class="add-step-button" id="add-step-button">+ Passo</button>
+                    </div>
+
+                    <div id="steps-container"></div>
+                </section>
+
+                <p id="create-route-message" class="builder-message" role="alert" hidden></p>
+
+                <div class="form-actions">
+                    <button type="submit" class="save-route-button" id="save-route-button">Guardar caminho</button>
+                    <a href="rotas.html" class="cancel-button">Cancelar</a>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <template id="step-template">
+        <article class="step-builder-card">
+            <div class="step-card-heading">
+                <strong data-step-number>Passo 1</strong>
+                <button type="button" class="remove-step-button" data-remove-step>Remover</button>
+            </div>
+
+            <label class="image-picker step-image-picker">
+                <span data-step-placeholder>Adicionar fotografia</span>
+                <img data-step-preview alt="Pré-visualização do passo" hidden>
+                <input class="file-input" type="file" accept="image/*" data-step-image>
+            </label>
+
+            <label class="field-label">Ou URL/caminho da imagem</label>
+            <input type="text" placeholder="https://... ou logo.png" data-step-reference>
+
+            <label class="field-label">Instrução curta *</label>
+            <textarea rows="2" placeholder="Ex.: Quando chegares à loja, vira à esquerda" data-step-instruction required></textarea>
+
+            <label class="field-label">Tipo de ação</label>
+            <select data-step-action>
+                <option value="straight">Seguir em frente</option>
+                <option value="left">Virar à esquerda</option>
+                <option value="right">Virar à direita</option>
+                <option value="cross">Atravessar</option>
+                <option value="landmark">Ponto de referência</option>
+                <option value="arrival">Chegada</option>
+            </select>
+        </article>
+    </template>
+
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/createRouteController.js"></script>
+</body>
+</html>

@@ -26,13 +26,44 @@ export const apiService = {
         body: JSON.stringify(user)
     }),
 
+    updateUser: (id, changes) => request(`/users/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(changes)
+    }),
+
     getRoutes: () => request("/routes"),
     getRouteById: (id) => request(`/routes/${id}`),
+    createRoute: (route) => request("/routes", {
+        method: "POST",
+        body: JSON.stringify(route)
+    }),
+    updateRoute: (id, changes) => request(`/routes/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(changes)
+    }),
 
     getRouteSteps(routeId = null) {
         const query = routeId ? `?routeId=${encodeURIComponent(routeId)}` : "";
         return request(`/routeSteps${query}`);
     },
 
-    getAchievements: () => request("/achievements")
+    createRouteStep: (step) => request("/routeSteps", {
+        method: "POST",
+        body: JSON.stringify(step)
+    }),
+
+    createRouteSteps(steps) {
+        return Promise.all(steps.map((step) => this.createRouteStep(step)));
+    },
+
+    updateRouteStep: (id, changes) => request(`/routeSteps/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(changes)
+    }),
+
+    getAchievements: () => request("/achievements"),
+    updateAchievement: (id, changes) => request(`/achievements/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(changes)
+    })
 };

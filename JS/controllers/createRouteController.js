@@ -159,6 +159,11 @@ form.addEventListener("submit", async (event) => {
 
         if (existingRoute) await saveEditedSteps(steps);
         else await apiService.createRouteSteps(steps.map((step) => step.toApiData()));
+        if (existingRoute && user.completedRouteIds?.includes(String(existingRoute.id))) {
+            user.completedRouteIds = user.completedRouteIds.filter((id) => String(id) !== String(existingRoute.id));
+            await apiService.updateUser(user.id, { completedRouteIds: user.completedRouteIds });
+            storageService.saveAuthenticatedUser(user);
+        }
         await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
         window.location.replace("rotas.html");
     } catch (error) {

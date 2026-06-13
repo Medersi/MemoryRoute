@@ -107,9 +107,12 @@ async function completeCurrentStep() {
 async function completeRoute() {
     const freshUserData = await apiService.getUserByEmail(sessionUser.email);
     const user = new User(freshUserData);
-    const rewarded = user.completeRoute(route.id, 20);
+    const userId = String(user.id);
+    const rewarded = !route.completedBy.includes(userId);
 
     route.markCompleted().markCompletedBy(user.id);
+    if (rewarded) user.addCoins(20);
+    if (!user.hasCompletedRoute(route.id)) user.completedRouteIds.push(String(route.id));
 
     await Promise.all([
         apiService.updateRoute(route.id, {

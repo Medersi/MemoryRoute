@@ -19,13 +19,13 @@
                         <h1>Olá, André</h1>
                         <p>Vamos continuar o teu caminho de hoje?</p>
                     </div>
-                    <img src="avatar.png" alt="Foto de André" class="user-avatar">
+                    <span class="user-avatar avatar-fallback" aria-label="Perfil de André">A</span>
                 </div>
             </header>
 
             <section class="main-card">
                 <div class="card-image-wrapper">
-                    <img src="fonte-laranjais.jpg" alt="Fonte dos Laranjais" class="card-img">
+                    <div class="card-img card-placeholder" role="img" aria-label="Fonte dos Laranjais">FL</div>
                 </div>
                 <div class="card-info">
                     <span class="badge-route">Próxima Rota</span>
@@ -43,27 +43,27 @@
             </section>
 
             <section class="quick-actions">
-                <div class="action-btn">
+                <a href="rotas.html" class="action-btn">
                     <div class="action-icon green-icon">➕</div>
                     <div class="action-text">
                         <h3>Criar Caminho</h3>
                         <p>Novo Percurso</p>
                     </div>
-                </div>
-                <div class="action-btn">
+                </a>
+                <a href="rotas.html" class="action-btn">
                     <div class="action-icon blue-icon">🗺️</div>
                     <div class="action-text">
                         <h3>Minhas rotas</h3>
                         <p>Ver todas</p>
                     </div>
-                </div>
-                <div class="action-btn">
+                </a>
+                <a href="perfil.html" class="action-btn">
                     <div class="action-icon orange-icon">❓</div>
                     <div class="action-text">
                         <h3>Ajuda</h3>
                         <p>Dicas e suporte</p>
                     </div>
-                </div>
+                </a>
             </section>
 
             <div class="dashboard-grid">
@@ -99,21 +99,21 @@
                     <h2>Rotas recentes</h2>
                     <div class="grid-card-content">
                         <div class="list-item">
-                            <img src="rota-porto.jpg" alt="Ribeira" class="thumb-img">
+                            <span class="thumb-img thumb-placeholder blue-thumb" aria-label="Ribeira do Porto">RP</span>
                             <div class="item-details">
                                 <h3>Ribeira do Porto</h3>
                                 <p class="status-done">Completa</p>
                             </div>
                         </div>
                         <div class="list-item">
-                            <img src="rota-republica.jpg" alt="Praça" class="thumb-img">
+                            <span class="thumb-img thumb-placeholder orange-thumb" aria-label="Praça da República">PR</span>
                             <div class="item-details">
                                 <h3>Praça da República</h3>
                                 <p class="status-progress">Em progresso</p>
                             </div>
                         </div>
                         <div class="list-item">
-                            <img src="rota-clerigos.jpg" alt="Clérigos" class="thumb-img">
+                            <span class="thumb-img thumb-placeholder purple-thumb" aria-label="Torre dos Clérigos">TC</span>
                             <div class="item-details">
                                 <h3>Torre dos Clérigos</h3>
                                 <p class="status-pending">Não iniciada</p>
@@ -136,20 +136,21 @@
         </div>
 
         <nav class="bottom-nav">
-            <a href="#" class="nav-item active">
+            <a href="index.html" class="nav-item active">
                 <span class="nav-icon">🏠</span>
                 <span class="nav-label">Início</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="rotas.html" class="nav-item">
                 <span class="nav-icon">🗺️</span>
                 <span class="nav-label">Rotas</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="conquistas.html" class="nav-item">
                 <span class="nav-icon">🏆</span>
                 <span class="nav-label">Conquistas</span>
             </a>
-            <a href="#" class="nav-item">
-                <img src="avatar.png" alt="Perfil" class="nav-avatar">
+            <a href="perfil.html" class="nav-item">
+                <span class="nav-avatar nav-avatar-fallback">A</span>
+                <span class="nav-label">Perfil</span>
             </a>
         </nav>
 

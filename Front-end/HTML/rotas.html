@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Rotas</title>
+    <link rel="stylesheet" href="../CSS/rotas.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="scroll-content">
+            <header class="page-header">
+                <img src="logo.png" alt="MemoryRoute" class="logo-small">
+                <div class="title-row">
+                    <div>
+                        <p class="eyebrow">Explorar</p>
+                        <h1>As minhas rotas</h1>
+                    </div>
+                    <a href="#" class="add-route" aria-label="Criar uma nova rota">+</a>
+                </div>
+            </header>
+
+            <section class="summary-card">
+                <div>
+                    <span class="summary-number">12</span>
+                    <span class="summary-label">rotas concluídas</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div>
+                    <span class="summary-number">28 km</span>
+                    <span class="summary-label">percorridos</span>
+                </div>
+            </section>
+
+            <div class="filter-list" aria-label="Filtros de rotas">
+                <button class="filter active" type="button">Todas</button>
+                <button class="filter" type="button">Em progresso</button>
+                <button class="filter" type="button">Concluídas</button>
+            </div>
+
+            <section class="routes-section">
+                <h2>Continuar caminho</h2>
+                <article class="featured-route">
+                    <div class="route-visual blue-visual">
+                        <span class="route-icon">⌖</span>
+                        <span class="route-distance">1,8 km</span>
+                    </div>
+                    <div class="featured-content">
+                        <span class="status progress-status">Em progresso</span>
+                        <h3>Praça da República</h3>
+                        <p>Faltam 2 de 5 passos</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <button type="button" class="primary-button">Continuar rota</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="routes-section">
+                <div class="section-heading">
+                    <h2>Rotas guardadas</h2>
+                    <span>3 rotas</span>
+                </div>
+
+                <article class="route-card">
+                    <div class="route-visual green-visual"><span class="route-icon">✓</span></div>
+                    <div class="route-details">
+                        <h3>Ribeira do Porto</h3>
+                        <p>2,4 km · 35 minutos</p>
+                        <span class="status done-status">Concluída</span>
+                    </div>
+                    <span class="chevron">›</span>
+                </article>
+
+                <article class="route-card">
+                    <div class="route-visual orange-visual"><span class="route-icon">⌖</span></div>
+                    <div class="route-details">
+                        <h3>Fonte dos Laranjais</h3>
+                        <p>1,2 km · 20 minutos</p>
+                        <span class="status new-status">Nova</span>
+                    </div>
+                    <span class="chevron">›</span>
+                </article>
+
+                <article class="route-card">
+                    <div class="route-visual purple-visual"><span class="route-icon">★</span></div>
+                    <div class="route-details">
+                        <h3>Torre dos Clérigos</h3>
+                        <p>3,1 km · 45 minutos</p>
+                        <span class="status saved-status">Guardada</span>
+                    </div>
+                    <span class="chevron">›</span>
+                </article>
+            </section>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Navegação principal">
+            <a href="index.html" class="nav-item"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
+            <a href="rotas.html" class="nav-item active"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
+            <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
+            <a href="perfil.html" class="nav-item"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+        </nav>
+    </div>
+</body>
+</html>

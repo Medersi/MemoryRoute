@@ -16,10 +16,10 @@
                 <img src="logo.png" alt="MemoryRoute Logo" class="logo-small">
                 <div class="user-welcome">
                     <div class="welcome-text">
-                        <h1>Olá, André</h1>
+                        <h1 data-home-greeting>Olá, André</h1>
                         <p>Vamos continuar o teu caminho de hoje?</p>
                     </div>
-                    <span class="user-avatar avatar-fallback" aria-label="Perfil de André">A</span>
+                    <span class="user-avatar avatar-fallback" data-home-avatar aria-label="Perfil do utilizador">A</span>
                 </div>
             </header>
 
@@ -74,7 +74,7 @@
                         <div class="list-item">
                             <span class="item-icon">🪙</span>
                             <div class="item-details">
-                                <h3 class="stat-highlight">120</h3>
+                                <h3 class="stat-highlight" data-home-coins>120</h3>
                                 <p>Moedas de Autonomia</p>
                             </div>
                         </div>
@@ -156,5 +156,7 @@
 
     </div>
 
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/homeController.js"></script>
 </body>
 </html>

@@ -7,35 +7,36 @@
     <link rel="stylesheet" href="../CSS/login.css">
 </head>
 <body>
-
     <div class="phone-canvas">
-        
         <div class="logo-container">
             <img src="logo.png" alt="MemoryRoute Logo" class="logo-img">
-            </div>
+        </div>
 
         <div class="login-card">
-            <h2>Welcome Back!</h2>
+            <h2>Bem-vindo!</h2>
 
-            <form class="login-form">
+            <form class="login-form" id="login-form">
                 <div class="input-group">
-                    <input type="text" placeholder="Username or Email" required>
-                </div>
-                
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
+                    <label class="sr-only" for="login-email">Email</label>
+                    <input id="login-email" name="email" type="email" placeholder="Email" autocomplete="email" required>
                 </div>
 
-                <button type="submit" class="btn-login">LOGIN</button>
+                <div class="input-group">
+                    <label class="sr-only" for="login-password">Palavra-passe</label>
+                    <input id="login-password" name="password" type="password" placeholder="Palavra-passe" autocomplete="current-password" required>
+                </div>
+
+                <p id="login-message" class="form-message" role="alert" hidden></p>
+                <button type="submit" class="btn-login">Entrar</button>
             </form>
 
             <div class="form-footer">
-                <span>Don’t have an account?</span>
-                <a href="registar.html" class="signup-link">Sign Up</a>
+                <span>Ainda não tens conta?</span>
+                <a href="registar.html" class="signup-link">Registar</a>
             </div>
         </div>
-
     </div>
 
+    <script type="module" src="../../JS/controllers/loginController.js"></script>
 </body>
 </html>

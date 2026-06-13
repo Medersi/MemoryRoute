@@ -131,3 +131,30 @@ body {
 .signup-link:hover {
     text-decoration: underline;
 }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.form-message {
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: #fff0f0;
+    color: #c52c2c;
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+.form-message.success {
+    background: #e8f7eb;
+    color: #267f3e;
+}
+
+.btn-login:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}

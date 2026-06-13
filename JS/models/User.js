@@ -1,0 +1,47 @@
+export class User {
+    constructor({
+        id = null,
+        name,
+        email,
+        password = "",
+        role = "user",
+        coins = 0,
+        level = 1,
+        emergencyContact = null,
+        createdAt = new Date().toISOString()
+    }) {
+        this.id = id;
+        this.name = name;
+        this.email = email.toLowerCase();
+        this.password = password;
+        this.role = role;
+        this.coins = coins;
+        this.level = level;
+        this.emergencyContact = emergencyContact;
+        this.createdAt = createdAt;
+    }
+
+    matchesCredentials(email, password) {
+        return this.email === email.trim().toLowerCase() && this.password === password;
+    }
+
+    addCoins(amount) {
+        if (amount > 0) this.coins += amount;
+        return this.coins;
+    }
+
+    isAdmin() {
+        return this.role === "admin";
+    }
+
+    toSessionData() {
+        const { password, ...safeUser } = this;
+        return safeUser;
+    }
+
+    toApiData() {
+        const data = { ...this };
+        if (data.id === null) delete data.id;
+        return data;
+    }
+}

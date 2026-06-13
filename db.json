@@ -1,0 +1,166 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "André Silva",
+      "email": "andre@memoryroute.pt",
+      "password": "andre123",
+      "role": "user",
+      "coins": 120,
+      "level": 2,
+      "emergencyContact": {
+        "name": "Maria Silva",
+        "phone": "912 345 678"
+      },
+      "createdAt": "2026-06-01T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "name": "Administrador",
+      "email": "admin@memoryroute.pt",
+      "password": "admin123",
+      "role": "admin",
+      "coins": 500,
+      "level": 5,
+      "emergencyContact": null,
+      "createdAt": "2026-06-01T09:00:00.000Z"
+    },
+    {
+      "name": "Gonçalo",
+      "email": "goncalosilchaves@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "coins": 0,
+      "level": 1,
+      "emergencyContact": null,
+      "createdAt": "2026-06-13T20:47:46.551Z",
+      "id": "LZuvpPwo8i8"
+    }
+  ],
+  "routes": [
+    {
+      "id": "1",
+      "name": "Praça da República",
+      "description": "Percurso simples pela praça e ruas próximas.",
+      "distanceKm": 1.8,
+      "durationMinutes": 25,
+      "difficulty": "fácil",
+      "ownerId": "1",
+      "status": "in-progress"
+    },
+    {
+      "id": "2",
+      "name": "Ribeira do Porto",
+      "description": "Percurso junto ao rio com pontos de referência conhecidos.",
+      "distanceKm": 2.4,
+      "durationMinutes": 35,
+      "difficulty": "média",
+      "ownerId": "1",
+      "status": "completed"
+    }
+  ],
+  "routeSteps": [
+    {
+      "id": "1",
+      "routeId": 1,
+      "order": 1,
+      "instruction": "Sair de casa e virar à direita.",
+      "landmark": "Padaria da esquina",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "routeId": 1,
+      "order": 2,
+      "instruction": "Continuar em frente até ao semáforo.",
+      "landmark": "Semáforo azul",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "routeId": 1,
+      "order": 3,
+      "instruction": "Atravessar a rua e entrar na praça.",
+      "landmark": "Fonte central",
+      "completed": true
+    },
+    {
+      "id": "4",
+      "routeId": 1,
+      "order": 4,
+      "instruction": "Contornar a fonte pelo lado esquerdo.",
+      "landmark": "Coreto",
+      "completed": false
+    },
+    {
+      "id": "5",
+      "routeId": 1,
+      "order": 5,
+      "instruction": "Chegar ao destino junto ao jardim.",
+      "landmark": "Portão verde",
+      "completed": false
+    },
+    {
+      "id": "6",
+      "routeId": 2,
+      "order": 1,
+      "instruction": "Descer em direção ao rio.",
+      "landmark": "Escadaria de pedra",
+      "completed": true
+    },
+    {
+      "id": "7",
+      "routeId": 2,
+      "order": 2,
+      "instruction": "Seguir pela marginal.",
+      "landmark": "Ponte D. Luís I",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "routeId": 2,
+      "order": 3,
+      "instruction": "Terminar junto à praça da Ribeira.",
+      "landmark": "Cais da Ribeira",
+      "completed": true
+    }
+  ],
+  "achievements": [
+    {
+      "id": "1",
+      "name": "Primeiro passo",
+      "description": "Concluir a primeira rota.",
+      "coinReward": 20,
+      "unlockedBy": [
+        "1"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Explorador local",
+      "description": "Concluir cinco rotas.",
+      "coinReward": 50,
+      "unlockedBy": [
+        "1"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Autónomo",
+      "description": "Concluir uma rota sem ajuda.",
+      "coinReward": 100,
+      "unlockedBy": []
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "userId": "1",
+      "title": "Continua o teu caminho",
+      "message": "Faltam apenas dois passos na rota Praça da República.",
+      "read": false,
+      "createdAt": "2026-06-13T09:00:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

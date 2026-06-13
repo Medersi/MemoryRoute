@@ -1,0 +1,17 @@
+{
+  "name": "memory-route",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Protótipo funcional da aplicação MemoryRoute",
+  "scripts": {
+    "server": "json-server --watch db.json --port 3000",
+    "frontend": "http-server . -p 8080 -c-1",
+    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "http-server": "^14.1.1",
+    "json-server": "^1.0.0-beta.3"
+  }
+}

@@ -7,39 +7,41 @@
     <link rel="stylesheet" href="../CSS/registar.css">
 </head>
 <body>
-
     <div class="phone-canvas">
-        
         <div class="logo-container">
             <img src="logo.png" alt="MemoryRoute Logo" class="logo-img">
         </div>
 
         <div class="login-card">
-            <h2>Greetings!</h2>
+            <h2>Criar conta</h2>
 
-            <form class="login-form">
+            <form class="login-form" id="register-form">
                 <div class="input-group">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                
-                <div class="input-group">
-                    <input type="email" placeholder="Email" required>
-                </div>
-                
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
+                    <label class="sr-only" for="register-name">Nome</label>
+                    <input id="register-name" name="name" type="text" placeholder="Nome" autocomplete="name" required>
                 </div>
 
-                <button type="submit" class="btn-register">Sign Up</button>
+                <div class="input-group">
+                    <label class="sr-only" for="register-email">Email</label>
+                    <input id="register-email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+                </div>
+
+                <div class="input-group">
+                    <label class="sr-only" for="register-password">Palavra-passe</label>
+                    <input id="register-password" name="password" type="password" placeholder="Palavra-passe" autocomplete="new-password" minlength="6" required>
+                </div>
+
+                <p id="register-message" class="form-message" role="alert" hidden></p>
+                <button type="submit" class="btn-register">Criar conta</button>
             </form>
 
             <div class="form-footer">
-                <span>Already have an account?</span>
-                <a href="login.html" class="signin-link">Sign in</a>
+                <span>Já tens uma conta?</span>
+                <a href="login.html" class="signin-link">Entrar</a>
             </div>
         </div>
-
     </div>
 
+    <script type="module" src="../../JS/controllers/registerController.js"></script>
 </body>
 </html>

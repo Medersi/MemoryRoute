@@ -11,16 +11,16 @@
         <main class="scroll-content">
             <header class="profile-header">
                 <img src="logo.png" alt="MemoryRoute" class="logo-small">
-                <div class="avatar-large">A</div>
-                <h1>André Silva</h1>
-                <p>Explorador desde junho de 2026</p>
+                <div class="avatar-large" data-profile-avatar>A</div>
+                <h1 data-profile-name>André Silva</h1>
+                <p data-profile-email>andre@memoryroute.pt</p>
                 <button type="button" class="edit-button">Editar perfil</button>
             </header>
 
             <section class="profile-stats" aria-label="Resumo do perfil">
-                <article><strong>12</strong><span>Rotas</span></article>
-                <article><strong>120</strong><span>Moedas</span></article>
-                <article><strong>4</strong><span>Conquistas</span></article>
+                <article><strong data-profile-level>2</strong><span>Nível</span></article>
+                <article><strong data-profile-coins>120</strong><span>Moedas</span></article>
+                <article><strong>Utilizador</strong><span>Conta</span></article>
             </section>
 
             <section class="settings-section">
@@ -41,7 +41,7 @@
                 <h2>Segurança e apoio</h2>
                 <a href="#" class="settings-row">
                     <span class="settings-icon red">☎</span>
-                    <span><strong>Contacto de emergência</strong><small>Maria Silva · 912 345 678</small></span>
+                    <span><strong>Contacto de emergência</strong><small data-profile-emergency>Maria Silva · 912 345 678</small></span>
                     <span class="chevron">›</span>
                 </a>
                 <a href="#" class="settings-row">
@@ -56,7 +56,7 @@
                 </a>
             </section>
 
-            <a href="login.html" class="logout-button">Terminar sessão</a>
+            <a href="login.html" class="logout-button" id="logout-button">Terminar sessão</a>
         </main>
 
         <nav class="bottom-nav" aria-label="Navegação principal">
@@ -66,5 +66,7 @@
             <a href="perfil.html" class="nav-item active"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
         </nav>
     </div>
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/profileController.js"></script>
 </body>
 </html>

@@ -33,6 +33,22 @@
         "LZuvpPwo8i8"
       ],
       "id": "1RZCoUgSZTY"
+    },
+    {
+      "name": "aaa",
+      "origin": "a",
+      "destination": "aa",
+      "description": "",
+      "mainImage": "",
+      "distanceKm": 0,
+      "durationMinutes": 0,
+      "difficulty": "fácil",
+      "ownerId": "LZuvpPwo8i8",
+      "createdBy": "LZuvpPwo8i8",
+      "userId": "LZuvpPwo8i8",
+      "status": "not_started",
+      "completedBy": [],
+      "id": "zxRNwL_W15Y"
     }
   ],
   "routeSteps": [

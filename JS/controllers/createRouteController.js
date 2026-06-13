@@ -28,9 +28,30 @@ function readImage(file) {
         if (!file.type.startsWith("image/")) return reject(new Error("Seleciona um ficheiro de imagem válido."));
 
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
+        reader.onload = () => resizeImage(reader.result).then(resolve).catch(reject);
         reader.onerror = () => reject(new Error("Não foi possível ler a imagem."));
         reader.readAsDataURL(file);
+    });
+}
+
+function resizeImage(source) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => {
+            const maximumSize = 1280;
+            const scale = Math.min(1, maximumSize / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+
+            const context = canvas.getContext("2d");
+            if (!context) return reject(new Error("Não foi possível preparar a fotografia."));
+
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.82));
+        };
+        image.onerror = () => reject(new Error("Não foi possível preparar a fotografia."));
+        image.src = source;
     });
 }
 

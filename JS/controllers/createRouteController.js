@@ -8,6 +8,7 @@ import {
     clearCreateRouteMessage,
     getStepCards,
     removeStepCard,
+    setEditMode,
     setSaving,
     showCreateRouteMessage,
     updateMainImagePreview,
@@ -20,7 +21,10 @@ const stepsContainer = document.querySelector("#steps-container");
 const mainImageInput = document.querySelector("#route-main-image");
 const user = storageService.getAuthenticatedUser();
 const fields = form.elements;
+const editRouteId = new URLSearchParams(window.location.search).get("edit");
 let mainImage = "";
+let existingRoute = null;
+let existingSteps = [];
 
 function readImage(file) {
     return new Promise((resolve, reject) => {
@@ -38,7 +42,7 @@ function resizeImage(source) {
     return new Promise((resolve, reject) => {
         const image = new Image();
         image.onload = () => {
-            const maximumSize = 1280;
+            const maximumSize = 900;
             const scale = Math.min(1, maximumSize / Math.max(image.width, image.height));
             const canvas = document.createElement("canvas");
             canvas.width = Math.round(image.width * scale);
@@ -48,11 +52,33 @@ function resizeImage(source) {
             if (!context) return reject(new Error("Não foi possível preparar a fotografia."));
 
             context.drawImage(image, 0, 0, canvas.width, canvas.height);
-            resolve(canvas.toDataURL("image/jpeg", 0.82));
+            resolve(compressCanvas(canvas));
         };
         image.onerror = () => reject(new Error("Não foi possível preparar a fotografia."));
         image.src = source;
     });
+}
+
+function compressCanvas(canvas) {
+    const maximumLength = 85000;
+    let quality = 0.75;
+    let result = canvas.toDataURL("image/jpeg", quality);
+
+    while (result.length > maximumLength && quality > 0.35) {
+        quality -= 0.1;
+        result = canvas.toDataURL("image/jpeg", quality);
+    }
+
+    while (result.length > maximumLength && canvas.width > 320 && canvas.height > 320) {
+        const resized = document.createElement("canvas");
+        resized.width = Math.round(canvas.width * 0.8);
+        resized.height = Math.round(canvas.height * 0.8);
+        resized.getContext("2d").drawImage(canvas, 0, 0, resized.width, resized.height);
+        canvas = resized;
+        result = canvas.toDataURL("image/jpeg", 0.45);
+    }
+
+    return result;
 }
 
 addStepButton.addEventListener("click", () => addStepCard());
@@ -96,8 +122,10 @@ form.addEventListener("submit", async (event) => {
     }
 
     setSaving(true);
+    let createdRoute = null;
     try {
         const route = new Route({
+            id: existingRoute?.id ?? null,
             name: fields.namedItem("name").value.trim(),
             origin: fields.namedItem("origin").value.trim(),
             destination: fields.namedItem("destination").value.trim(),
@@ -112,9 +140,15 @@ form.addEventListener("submit", async (event) => {
             completedBy: []
         });
 
-        const createdRoute = await apiService.createRoute(route.toApiData());
+        const routeData = route.toApiData();
+        delete routeData.id;
+        const savedRoute = existingRoute
+            ? await apiService.updateRoute(existingRoute.id, routeData)
+            : await apiService.createRoute(routeData);
+        if (!existingRoute) createdRoute = savedRoute;
         const steps = stepCards.map((card, index) => new RouteStep({
-            routeId: createdRoute.id,
+            id: card.dataset.existingStepId || null,
+            routeId: savedRoute.id,
             order: index + 1,
             title: actionLabel(card.querySelector("[data-step-action]").value),
             instruction: card.querySelector("[data-step-instruction]").value.trim(),
@@ -123,14 +157,34 @@ form.addEventListener("submit", async (event) => {
             completed: false
         }));
 
-        await apiService.createRouteSteps(steps.map((step) => step.toApiData()));
+        if (existingRoute) await saveEditedSteps(steps);
+        else await apiService.createRouteSteps(steps.map((step) => step.toApiData()));
         await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
         window.location.replace("rotas.html");
-    } catch {
-        showCreateRouteMessage("Não foi possível guardar o caminho. Confirma se o JSON Server está ativo.");
+    } catch (error) {
+        if (createdRoute) {
+            await apiService.deleteRouteSteps(createdRoute.id).catch(() => {});
+            await apiService.deleteRoute(createdRoute.id).catch(() => {});
+        }
+        showCreateRouteMessage(`Não foi possível guardar o caminho. ${error.message}`);
         setSaving(false);
     }
 });
+
+async function saveEditedSteps(steps) {
+    const savedIds = new Set(steps.filter((step) => step.id).map((step) => String(step.id)));
+
+    await Promise.all(steps.map((step) => {
+        const data = step.toApiData();
+        delete data.id;
+        return step.id
+            ? apiService.updateRouteStep(step.id, data)
+            : apiService.createRouteStep(data);
+    }));
+
+    const removedSteps = existingSteps.filter((step) => !savedIds.has(String(step.id)));
+    await Promise.all(removedSteps.map((step) => apiService.deleteRouteStep(step.id)));
+}
 
 function validateRoute(stepCards) {
     if (!fields.namedItem("name").value.trim()) return "Indica um nome para a rota.";
@@ -163,4 +217,35 @@ function actionLabel(action) {
     return labels[action] || "Próximo passo";
 }
 
-addStepCard();
+async function initialize() {
+    if (!editRouteId) {
+        addStepCard();
+        return;
+    }
+
+    try {
+        const [routeData, steps] = await Promise.all([
+            apiService.getRouteById(editRouteId),
+            apiService.getRouteSteps(editRouteId)
+        ]);
+
+        if (String(routeData.createdBy ?? routeData.userId) !== String(user.id)) {
+            window.location.replace("rotas.html");
+            return;
+        }
+
+        existingRoute = new Route(routeData);
+        existingSteps = steps.map((step) => new RouteStep(step));
+        mainImage = existingRoute.mainImage || "";
+        setEditMode(existingRoute);
+        existingSteps
+            .sort((a, b) => a.order - b.order)
+            .forEach((step) => addStepCard(step));
+        if (!existingSteps.length) addStepCard();
+    } catch {
+        showCreateRouteMessage("Não foi possível carregar a rota para edição.");
+        addStepCard();
+    }
+}
+
+initialize();

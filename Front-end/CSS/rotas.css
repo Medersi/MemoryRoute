@@ -260,6 +260,34 @@
     color: #e8a900;
 }
 
+.route-manage-actions {
+    display: flex;
+    margin-top: 7px;
+    gap: 7px;
+}
+
+.edit-route-button,
+.delete-route-button {
+    padding: 5px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.edit-route-button {
+    border: 1px solid #cfe8fb;
+    background: #eaf6ff;
+    color: #1e90ff;
+}
+
+.delete-route-button {
+    border: 1px solid #ffd6d6;
+    background: #fff3f3;
+    color: #d94343;
+}
+
 .chevron {
     display: flex;
     align-items: center;

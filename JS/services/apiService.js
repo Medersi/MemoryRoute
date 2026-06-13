@@ -49,6 +49,7 @@ export const apiService = {
         method: "PATCH",
         body: JSON.stringify(changes)
     }),
+    deleteRoute: (id) => request(`/routes/${id}`, { method: "DELETE" }),
 
     getRouteSteps(routeId = null) {
         const query = routeId ? `?routeId=${encodeURIComponent(routeId)}` : "";
@@ -68,6 +69,11 @@ export const apiService = {
         method: "PATCH",
         body: JSON.stringify(changes)
     }),
+    deleteRouteStep: (id) => request(`/routeSteps/${id}`, { method: "DELETE" }),
+    async deleteRouteSteps(routeId) {
+        const steps = await this.getRouteSteps(routeId);
+        await Promise.all(steps.map((step) => this.deleteRouteStep(step.id)));
+    },
 
     getAchievements: () => request("/achievements"),
     getUserAchievements: (userId) => request(`/userAchievements?userId=${encodeURIComponent(userId)}`),
@@ -91,6 +97,10 @@ export const apiService = {
     }),
     async removeFavorite(userId, routeId) {
         const favorites = await request(`/favorites?userId=${encodeURIComponent(userId)}&routeId=${encodeURIComponent(routeId)}`);
+        await Promise.all(favorites.map((favorite) => request(`/favorites/${favorite.id}`, { method: "DELETE" })));
+    },
+    async removeFavoritesByRoute(routeId) {
+        const favorites = await request(`/favorites?routeId=${encodeURIComponent(routeId)}`);
         await Promise.all(favorites.map((favorite) => request(`/favorites/${favorite.id}`, { method: "DELETE" })));
     }
 };

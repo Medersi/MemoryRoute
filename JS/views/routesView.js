@@ -56,6 +56,10 @@ function routeCard(route, user, isFavorite) {
                         ${isFavorite ? "★" : "☆"}
                     </button>
                 </div>
+                <div class="route-manage-actions">
+                    <a href="criar-rota.html?edit=${encodeURIComponent(route.id)}" class="edit-route-button">Editar</a>
+                    <button type="button" class="delete-route-button" data-delete-route-id="${escapeHtml(route.id)}">Apagar</button>
+                </div>
             </div>
             <a href="explorar-rota.html?id=${encodeURIComponent(route.id)}" class="chevron" aria-label="Explorar ${escapeHtml(route.name)}">›</a>
         </article>

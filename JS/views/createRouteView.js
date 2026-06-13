@@ -2,8 +2,9 @@ const stepsContainer = document.querySelector("#steps-container");
 const stepTemplate = document.querySelector("#step-template");
 const message = document.querySelector("#create-route-message");
 let nextStepId = 1;
+let editing = false;
 
-export function addStepCard() {
+export function addStepCard(step = null) {
     const fragment = stepTemplate.content.cloneNode(true);
     const card = fragment.querySelector(".step-builder-card");
     const stepId = nextStepId++;
@@ -15,6 +16,7 @@ export function addStepCard() {
     card.querySelector("[data-step-image]").name = `step-image-${stepId}`;
     card.querySelector("[data-step-reference]").name = `step-reference-${stepId}`;
     stepsContainer.appendChild(fragment);
+    if (step) fillStepCard(stepsContainer.lastElementChild, step);
     updateStepNumbers();
     return stepsContainer.lastElementChild;
 }
@@ -57,7 +59,35 @@ export function clearCreateRouteMessage() {
 export function setSaving(saving) {
     const button = document.querySelector("#save-route-button");
     button.disabled = saving;
-    button.textContent = saving ? "A guardar caminho..." : "Guardar caminho";
+    button.textContent = saving
+        ? "A guardar caminho..."
+        : editing ? "Guardar alterações" : "Guardar caminho";
+}
+
+export function setEditMode(route) {
+    editing = true;
+    document.querySelector(".builder-header h1").textContent = "Editar rota visual";
+    document.querySelector("#save-route-button").textContent = "Guardar alterações";
+    document.querySelector("#route-name").value = route.name || "";
+    document.querySelector("#route-origin").value = route.origin || "";
+    document.querySelector("#route-destination").value = route.destination || "";
+    document.querySelector("#route-description").value = route.description || "";
+    document.querySelector("#route-duration").value = route.durationMinutes || "";
+    document.querySelector("#route-difficulty").value = route.difficulty || "fácil";
+    if (route.mainImage) updateMainImagePreview(route.mainImage);
+}
+
+function fillStepCard(card, step) {
+    card.dataset.existingStepId = step.id || "";
+    card.querySelector("[data-step-instruction]").value = step.instruction || "";
+    card.querySelector("[data-step-action]").value = step.actionType || "landmark";
+
+    if (step.image) {
+        updateStepPreview(card, step.image);
+        if (!step.image.startsWith("data:")) {
+            card.querySelector("[data-step-reference]").value = step.image;
+        }
+    }
 }
 
 function updateStepNumbers() {

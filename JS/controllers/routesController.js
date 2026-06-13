@@ -31,11 +31,43 @@ function bindEvents() {
     });
 
     document.querySelector("#routes-list")?.addEventListener("click", async (event) => {
+        const deleteButton = event.target.closest("[data-delete-route-id]");
+        if (deleteButton) {
+            await deleteRoute(deleteButton.dataset.deleteRouteId);
+            return;
+        }
+
         const button = event.target.closest("[data-favorite-route-id]");
         if (!button) return;
         button.disabled = true;
         await toggleFavorite(button.dataset.favoriteRouteId);
     });
+}
+
+async function deleteRoute(routeId) {
+    const route = routes.find((item) => String(item.id) === String(routeId));
+    if (!route || !window.confirm(`Apagar a rota "${route.name}" e todos os seus passos?`)) return;
+
+    try {
+        await Promise.all([
+            apiService.deleteRouteSteps(routeId),
+            apiService.removeFavoritesByRoute(routeId)
+        ]);
+        await apiService.deleteRoute(routeId);
+
+        routes = routes.filter((item) => String(item.id) !== String(routeId));
+        favorites = favorites.filter((favorite) => String(favorite.routeId) !== String(routeId));
+
+        if (user.completedRouteIds?.includes(String(routeId))) {
+            user.completedRouteIds = user.completedRouteIds.filter((id) => String(id) !== String(routeId));
+            await apiService.updateUser(user.id, { completedRouteIds: user.completedRouteIds });
+            storageService.saveAuthenticatedUser(user);
+        }
+
+        renderCurrentRoutes();
+    } catch {
+        renderRoutesError();
+    }
 }
 
 async function toggleFavorite(routeId) {

@@ -224,3 +224,13 @@
     color: #79838e;
     font-size: 0.62rem;
 }
+
+.progress-message {
+    min-height: 18px;
+    color: #5f6d79;
+    font-size: 0.7rem;
+}
+
+.achievement-grid .progress-message {
+    grid-column: 1 / -1;
+}

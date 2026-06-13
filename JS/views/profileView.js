@@ -8,15 +8,24 @@ function initials(name = "") {
         .toUpperCase();
 }
 
-export function renderProfile(user) {
-    document.querySelector("[data-profile-name]").textContent = user.name;
-    document.querySelector("[data-profile-email]").textContent = user.email;
-    document.querySelector("[data-profile-coins]").textContent = user.coins;
-    document.querySelector("[data-profile-level]").textContent = user.level;
-    document.querySelector("[data-profile-avatar]").textContent = initials(user.name);
+export function renderProfile(user, progress = null) {
+    setText("[data-profile-name]", user.name);
+    setText("[data-profile-email]", user.email);
+    setText("[data-profile-coins]", user.coins);
+    setText("[data-profile-level]", progress?.level ?? user.level);
+    setText("[data-profile-avatar]", initials(user.name));
+    setText("[data-profile-completed]", progress?.completedRoutes.length ?? 0);
+    setText("[data-profile-created]", progress?.routesCreated.length ?? 0);
+    setText("[data-profile-achievements]", progress?.unlockedAchievements.length ?? 0);
+    setText("[data-profile-favorites]", progress?.favorites.length ?? 0);
 
     const contact = user.emergencyContact;
-    document.querySelector("[data-profile-emergency]").textContent = contact
+    setText("[data-profile-emergency]", contact
         ? `${contact.name} · ${contact.phone}`
-        : "Nenhum contacto definido";
+        : "Nenhum contacto definido");
+}
+
+function setText(selector, value) {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
 }

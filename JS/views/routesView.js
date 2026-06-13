@@ -8,18 +8,25 @@ const statusData = {
     not_started: { label: "Não iniciada", className: "new-status", button: "Iniciar rota", visual: "orange-visual", icon: "⌖" }
 };
 
-export function renderRoutes(routes, user) {
+export function renderRoutes(routes, user, favoriteRouteIds = []) {
+    const favoriteIds = new Set(favoriteRouteIds.map(String));
     routeCount.textContent = `${routes.length} ${routes.length === 1 ? "rota" : "rotas"}`;
     routesList.innerHTML = routes.length
-        ? routes.map((route) => routeCard(route, user)).join("")
-        : '<p class="routes-message">Ainda não criaste caminhos. Usa o botão + para criar o primeiro.</p>';
+        ? routes.map((route) => routeCard(route, user, favoriteIds.has(String(route.id)))).join("")
+        : '<p class="routes-message">Não existem rotas neste filtro.</p>';
 }
 
 export function renderRoutesError() {
     routesList.innerHTML = '<p class="routes-message">Não foi possível carregar as rotas.</p>';
 }
 
-function routeCard(route, user) {
+export function setActiveRouteFilter(filter) {
+    document.querySelectorAll("[data-route-filter]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.routeFilter === filter);
+    });
+}
+
+function routeCard(route, user, isFavorite) {
     const completed = route.completedBy?.includes(String(user.id));
     const status = completed
         ? "completed"
@@ -40,7 +47,14 @@ function routeCard(route, user) {
                 <h3>${escapeHtml(route.name)}</h3>
                 <p>${escapeHtml(meta || route.description || "Percurso visual")}</p>
                 <span class="status ${info.className}">${info.label}</span>
-                <a href="explorar-rota.html?id=${encodeURIComponent(route.id)}" class="route-start-button">${info.button}</a>
+                <div class="route-actions">
+                    <a href="explorar-rota.html?id=${encodeURIComponent(route.id)}" class="route-start-button">${info.button}</a>
+                    <button type="button" class="favorite-button ${isFavorite ? "active" : ""}"
+                        data-favorite-route-id="${escapeHtml(route.id)}"
+                        aria-label="${isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}">
+                        ${isFavorite ? "★" : "☆"}
+                    </button>
+                </div>
             </div>
             <a href="explorar-rota.html?id=${encodeURIComponent(route.id)}" class="chevron" aria-label="Explorar ${escapeHtml(route.name)}">›</a>
         </article>

@@ -235,6 +235,31 @@
     text-decoration: none;
 }
 
+.route-actions {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.favorite-button {
+    width: 30px;
+    height: 30px;
+    margin-top: 6px;
+    border: 1px solid #dce6ee;
+    border-radius: 10px;
+    background: #fff;
+    color: #a2abb4;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.favorite-button.active {
+    border-color: #ffd87a;
+    background: #fff8df;
+    color: #e8a900;
+}
+
 .chevron {
     display: flex;
     align-items: center;

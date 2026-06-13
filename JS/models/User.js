@@ -32,6 +32,14 @@ export class User {
         return this.coins;
     }
 
+    calculateLevel() {
+        if (this.coins >= 350) return 5;
+        if (this.coins >= 200) return 4;
+        if (this.coins >= 100) return 3;
+        if (this.coins >= 50) return 2;
+        return 1;
+    }
+
     isAdmin() {
         return this.role === "admin";
     }

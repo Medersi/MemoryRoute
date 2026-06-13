@@ -2,6 +2,7 @@ import { Route } from "../models/Route.js";
 import { RouteStep } from "../models/RouteStep.js";
 import { apiService } from "../services/apiService.js";
 import { storageService } from "../services/storageService.js";
+import { progressService } from "../services/progressService.js";
 import {
     addStepCard,
     clearCreateRouteMessage,
@@ -102,6 +103,7 @@ form.addEventListener("submit", async (event) => {
         }));
 
         await apiService.createRouteSteps(steps.map((step) => step.toApiData()));
+        await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
         window.location.replace("rotas.html");
     } catch {
         showCreateRouteMessage("Não foi possível guardar o caminho. Confirma se o JSON Server está ativo.");

@@ -32,6 +32,14 @@ export const apiService = {
     }),
 
     getRoutes: () => request("/routes"),
+    async getRoutesByUser(userId) {
+        const routes = await request("/routes");
+        return routes.filter((route) => String(route.createdBy ?? route.userId) === String(userId));
+    },
+    async getCompletedRoutesByUser(userId) {
+        const routes = await request("/routes");
+        return routes.filter((route) => route.completedBy?.map(String).includes(String(userId)));
+    },
     getRouteById: (id) => request(`/routes/${id}`),
     createRoute: (route) => request("/routes", {
         method: "POST",
@@ -62,8 +70,27 @@ export const apiService = {
     }),
 
     getAchievements: () => request("/achievements"),
+    getUserAchievements: (userId) => request(`/userAchievements?userId=${encodeURIComponent(userId)}`),
+    createUserAchievement: (userAchievement) => request("/userAchievements", {
+        method: "POST",
+        body: JSON.stringify(userAchievement)
+    }),
     updateAchievement: (id, changes) => request(`/achievements/${id}`, {
         method: "PATCH",
         body: JSON.stringify(changes)
-    })
+    }),
+
+    getFavoritesByUser: (userId) => request(`/favorites?userId=${encodeURIComponent(userId)}`),
+    addFavorite: (userId, routeId) => request("/favorites", {
+        method: "POST",
+        body: JSON.stringify({
+            userId: String(userId),
+            routeId: String(routeId),
+            createdAt: new Date().toISOString()
+        })
+    }),
+    async removeFavorite(userId, routeId) {
+        const favorites = await request(`/favorites?userId=${encodeURIComponent(userId)}&routeId=${encodeURIComponent(routeId)}`);
+        await Promise.all(favorites.map((favorite) => request(`/favorites/${favorite.id}`, { method: "DELETE" })));
+    }
 };

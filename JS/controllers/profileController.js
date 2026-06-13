@@ -1,11 +1,18 @@
 import { authService } from "../services/authService.js";
+import { progressService } from "../services/progressService.js";
 import { storageService } from "../services/storageService.js";
 import { renderProfile } from "../views/profileView.js";
 
-const user = storageService.getAuthenticatedUser();
+async function initialize() {
+    const user = storageService.getAuthenticatedUser();
+    if (!user) return;
 
-if (user) {
-    renderProfile(user);
+    try {
+        const progress = await progressService.getProgressData(user.id);
+        renderProfile(progress.user, progress);
+    } catch {
+        renderProfile(user);
+    }
 }
 
 document.querySelector("#logout-button").addEventListener("click", (event) => {
@@ -13,3 +20,5 @@ document.querySelector("#logout-button").addEventListener("click", (event) => {
     authService.logout();
     window.location.replace("login.html");
 });
+
+initialize();

@@ -55,7 +55,71 @@
       "id": "nGZcDc3El8M"
     }
   ],
-  "achievements": [],
+  "achievements": [
+    {
+      "id": "achievement-first-route",
+      "name": "Primeira rota sozinho",
+      "description": "Concluir a primeira rota.",
+      "criteria": {
+        "type": "completed_routes",
+        "target": 1
+      }
+    },
+    {
+      "id": "achievement-neighborhood-explorer",
+      "name": "Explorador de Bairro",
+      "description": "Concluir 5 rotas.",
+      "criteria": {
+        "type": "completed_routes",
+        "target": 5
+      }
+    },
+    {
+      "id": "achievement-path-creator",
+      "name": "Criador de Caminhos",
+      "description": "Criar a primeira rota visual.",
+      "criteria": {
+        "type": "created_routes",
+        "target": 1
+      }
+    },
+    {
+      "id": "achievement-active-tutor",
+      "name": "Tutor Ativo",
+      "description": "Criar 3 rotas visuais.",
+      "criteria": {
+        "type": "created_routes",
+        "target": 3
+      }
+    },
+    {
+      "id": "achievement-100-coins",
+      "name": "100 moedas",
+      "description": "Atingir 100 moedas.",
+      "criteria": {
+        "type": "coins",
+        "target": 100
+      }
+    },
+    {
+      "id": "achievement-200-coins",
+      "name": "200 moedas",
+      "description": "Atingir 200 moedas.",
+      "criteria": {
+        "type": "coins",
+        "target": 200
+      }
+    }
+  ],
   "notifications": [],
+  "userAchievements": [
+    {
+      "userId": "LZuvpPwo8i8",
+      "achievementId": "achievement-path-creator",
+      "unlockedAt": "2026-06-13T22:11:44.942Z",
+      "id": "c-hiMXYPtmY"
+    }
+  ],
+  "favorites": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

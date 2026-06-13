@@ -1,9 +1,9 @@
-import { Achievement } from "../models/Achievement.js";
 import { Route } from "../models/Route.js";
 import { RouteStep } from "../models/RouteStep.js";
 import { User } from "../models/User.js";
 import { apiService } from "../services/apiService.js";
 import { storageService } from "../services/storageService.js";
+import { progressService } from "../services/progressService.js";
 import {
     clearExploreMessage,
     getExploreElements,
@@ -96,25 +96,10 @@ async function completeRoute() {
         })
     ]);
 
-    const achievementUnlocked = user.completedRouteIds.length === 1
-        ? await unlockFirstRouteAchievement(user.id)
-        : false;
-
     storageService.saveAuthenticatedUser(user.toSessionData());
+    const newlyUnlocked = await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
+    const achievementUnlocked = newlyUnlocked.some((achievement) => achievement.name === "Primeira rota sozinho");
     showCompletion(route.name, rewarded, achievementUnlocked);
-}
-
-async function unlockFirstRouteAchievement(userId) {
-    const achievements = await apiService.getAchievements();
-    const data = achievements.find((item) => item.name === "Primeira rota sozinho");
-    if (!data) return false;
-
-    const achievement = new Achievement(data);
-    if (achievement.isUnlockedBy(userId)) return false;
-
-    achievement.unlockFor(userId);
-    await apiService.updateAchievement(achievement.id, { unlockedBy: achievement.unlockedBy });
-    return true;
 }
 
 function requestHelp() {

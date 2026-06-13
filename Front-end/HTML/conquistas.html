@@ -13,16 +13,40 @@
                 <img src="logo.png" alt="MemoryRoute" class="logo-small">
                 <p class="eyebrow">O teu progresso</p>
                 <h1>Conquistas</h1>
-                <p>As conquistas desbloqueadas ao concluir caminhos aparecerão aqui.</p>
+                <p class="progress-message" data-achievement-message></p>
             </header>
 
-            <section class="achievement-section">
-                <div class="empty-state">
-                    <div class="achievement-icon blue">★</div>
-                    <h2>Ainda não existem conquistas</h2>
-                    <p>Conclui caminhos para começar a desbloquear conquistas.</p>
-                    <a href="rotas.html">Ver caminhos</a>
+            <section class="level-card" aria-label="Nível e moedas">
+                <div class="level-icon">★</div>
+                <div class="level-content">
+                    <span>Nível atual</span>
+                    <h2>Nível <strong data-progress-level>1</strong></h2>
+                    <div class="level-progress"><div class="level-fill" data-level-fill></div></div>
+                    <p>O nível é calculado com base nas tuas moedas.</p>
                 </div>
+                <strong><span data-progress-coins>0</span> moedas</strong>
+            </section>
+
+            <section class="stats-grid" aria-label="Estatísticas">
+                <article><strong data-progress-completed>0</strong><span>Rotas concluídas</span></article>
+                <article><strong data-progress-created>0</strong><span>Rotas criadas</span></article>
+                <article><strong data-progress-distance>0.0 km</strong><span>Distância concluída</span></article>
+            </section>
+
+            <section class="achievement-section">
+                <div class="section-heading">
+                    <h2>Desbloqueadas</h2>
+                    <span><strong data-unlocked-count>0</strong> conquistas</span>
+                </div>
+                <div class="achievement-grid" id="unlocked-achievements"></div>
+            </section>
+
+            <section class="achievement-section">
+                <div class="section-heading">
+                    <h2>Por desbloquear</h2>
+                    <span><strong data-locked-count>0</strong> conquistas</span>
+                </div>
+                <div id="locked-achievements"></div>
             </section>
         </main>
 
@@ -34,5 +58,6 @@
         </nav>
     </div>
     <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/achievementsController.js"></script>
 </body>
 </html>

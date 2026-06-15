@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Ajuda e Suporte</title>
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <link rel="stylesheet" href="../CSS/suporte.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="scroll-content">
+            <!-- Cabeçalho Centrado -->
+            <header class="sub-header">
+                <a href="perfil.html" class="back-button">‹ Voltar</a>
+                <h1>Ajuda e suporte</h1>
+            </header>
+
+            <!-- Secção de Perguntas Frequentes (FAQ) -->
+            <section class="faq-section">
+                <h2>Perguntas Frequentes</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question">Como funciona a MemoryRoute? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">
+                        <p>A MemoryRoute é uma aplicação que combina navegação inclusiva com gamificação, ajudando-te a descobrir rotas fantásticas enquanto ganhas conquistas!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">O que é a Rota Acessível? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">
+                        <p>Se ativares esta opção nas tuas preferências, a aplicação irá calcular caminhos sem escadas, pisos irregulares ou obstáculos pesados, ideal para carrinhos ou cadeiras de rodas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">Como ganho conquistas? <span class="faq-chevron">›</span></button>
+                    <div class="faq-answer">
+                        <p>Basta selecionares uma rota, completares o percurso e fazeres check-in nos pontos de interesse sugeridos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secção de Contacto Direto -->
+            <section class="support-contact">
+                <h2>Ainda precisas de ajuda?</h2>
+                <p>Envia um email para a nossa equipa de suporte técnico.</p>
+                <a href="mailto:suporte@memoryroute.pt" class="email-button">Contactar Suporte</a>
+            </section>
+        </main>
+
+        <!-- Barra de navegação -->
+        <nav class="bottom-nav" aria-label="Navegação principal">
+            <a href="index.html" class="nav-item"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
+            <a href="rotas.html" class="nav-item"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
+            <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
+            <a href="perfil.html" class="nav-item active"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/suporteController.js"></script>
+</body>
+</html>

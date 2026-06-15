@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Contacto de Emergência</title>
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <link rel="stylesheet" href="../CSS/emergencia.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="scroll-content">
+            <header class="sub-header">
+                <a href="perfil.html" class="back-button">‹ Voltar</a>
+                <h1>Contacto de emergência</h1>
+                <div class="spacer"></div>
+            </header>
+
+            <div class="current-contact-card">
+                <p class="card-label">Contacto atual:</p>
+                <h2 id="current-name">Nenhum contacto definido</h2>
+                <p id="current-phone" class="phone-number">-</p>
+            </div>
+
+            <form id="form-emergencia" class="edit-form">
+                <h2>Alterar contacto</h2>
+                
+                <div class="input-group">
+                    <label for="input-emergencia-nome">Nome do Contacto</label>
+                    <input type="text" id="input-emergencia-nome" placeholder="Ex: Mãe, Pai, Irmão" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="input-emergencia-fone">Número de Telefone</label>
+                    <input type="tel" id="input-emergencia-fone" placeholder="Ex: 912345678" pattern="[0-9]{9}" required>
+                </div>
+
+                <button type="submit" class="save-button">Guardar Contacto</button>
+            </form>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Navegação principal">
+            <a href="index.html" class="nav-item"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
+            <a href="rotas.html" class="nav-item"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
+            <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
+            <a href="perfil.html" class="nav-item active"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+        </nav>
+    </div>
+
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/emergenciaController.js"></script>
+</body>
+</html>

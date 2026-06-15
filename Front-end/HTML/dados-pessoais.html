@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoryRoute - Dados Pessoais</title>
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <link rel="stylesheet" href="../CSS/dados-pessoais.css">
+</head>
+<body>
+    <div class="phone-canvas">
+        <main class="scroll-content">
+            <header class="sub-header">
+                <a href="perfil.html" class="back-button">‹ Voltar</a>
+                <h1>Dados pessoais</h1>
+                <div class="spacer"></div>
+            </header>
+
+            <form id="form-dados-pessoais" class="edit-form">
+                <div class="input-group">
+                    <label for="input-name">Nome completo</label>
+                    <input type="text" id="input-name" required placeholder="O teu nome">
+                </div>
+
+                <div class="input-group">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" required placeholder="O teu email">
+                </div>
+
+                <div class="input-group">
+                    <label for="input-password">Nova palavra-passe</label>
+                    <input type="password" id="input-password" placeholder="Deixa em branco para manter a atual">
+                </div>
+
+                <button type="submit" class="save-button">Guardar alterações</button>
+            </form>
+        </main>
+
+        <nav class="bottom-nav" aria-label="Navegação principal">
+            <a href="index.html" class="nav-item"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
+            <a href="rotas.html" class="nav-item"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
+            <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
+            <a href="perfil.html" class="nav-item active"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+        </nav>
+    </div>
+
+    <script type="module" src="../../JS/controllers/authGuard.js"></script>
+    <script type="module" src="../../JS/controllers/dadosPessoaisController.js"></script>
+</body>
+</html>

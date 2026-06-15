@@ -1,0 +1,123 @@
+/* Front-end/CSS/emergencia.css */
+/* Cabeçalho Fixo e Centrado */
+.sub-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* Aumentamos a altura mínima do cabeçalho para o título ter espaço para descer */
+    min-height: 60px; 
+    border-bottom: 1px solid #f8fafc;
+}
+
+.back-button {
+    position: absolute;
+    left: 20px;
+    /* Em vez de 50%, fixamos o Voltar mais perto do topo para o título poder descer livremente */
+    top: 22px; 
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.sub-header h1 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+    line-height: 1.3;
+    /* A MAGIA ESTÁ AQUI: empurra o título para baixo, separando-o da linha do Voltar */
+    margin-top: 25px; 
+    margin-bottom: 5px;
+    max-width: 70%; /* Garante que o texto quebra em duas linhas direitinho se falhar o espaço */
+}
+
+/* Podes apagar a classe .spacer do HTML se quiseres, já não vai ser precisa aqui */
+.spacer { display: none; }
+
+.spacer { width: 50px; }
+
+/* Cartão do Contacto Mais Clean */
+.current-contact-card {
+    background-color: #f8fafc; /* Um cinza azulado muito leve e limpo */
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #dc3545; /* Linha de destaque vermelha à esquerda */
+    padding: 16px 20px;
+    margin: 20px;
+    border-radius: 12px;
+}
+
+.card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #64748b; /* Tom cinza neutro secundário */
+    margin: 0 0 6px 0;
+    font-weight: 700;
+}
+
+.current-contact-card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #0f172a; /* Texto quase preto, muito moderno */
+}
+
+.phone-number {
+    font-size: 14px;
+    margin: 4px 0 0 0;
+    color: #475569;
+    font-weight: 500;
+}
+
+/* Formulário */
+.edit-form {
+    padding: 10px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.edit-form h2 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+    margin-bottom: 4px;
+    margin-top: 10px;
+}
+
+.input-group input {
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #ffffff; /* Fundo branco para contrastar com o cinza do cartão */
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.save-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.save-button:hover {
+    background-color: #bd2130;
+}

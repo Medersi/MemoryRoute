@@ -6,6 +6,7 @@ const currentName = document.getElementById("current-name");
 const currentPhone = document.getElementById("current-phone");
 const inputName = document.getElementById("input-emergencia-nome");
 const inputPhone = document.getElementById("input-emergencia-fone");
+const callButton = document.getElementById("call-emergency-button");
 
 initialize();
 
@@ -15,6 +16,7 @@ function initialize() {
 
     renderContact(user.emergencyContact);
     form?.addEventListener("submit", handleSubmit);
+    callButton?.addEventListener("click", handleCallClick);
 }
 
 async function handleSubmit(event) {
@@ -41,10 +43,33 @@ async function handleSubmit(event) {
 }
 
 function renderContact(contact) {
-    if (!contact) return;
+    if (!contact?.phone) {
+        if (callButton) {
+            callButton.href = "#";
+            callButton.classList.add("disabled");
+            callButton.setAttribute("aria-disabled", "true");
+        }
+        return;
+    }
 
     if (currentName) currentName.textContent = contact.name;
     if (currentPhone) currentPhone.textContent = contact.phone;
     if (inputName) inputName.value = contact.name;
     if (inputPhone) inputPhone.value = contact.phone;
+    if (callButton) {
+        callButton.href = `tel:${normalizePhone(contact.phone)}`;
+        callButton.classList.remove("disabled");
+        callButton.setAttribute("aria-disabled", "false");
+    }
+}
+
+function handleCallClick(event) {
+    if (!callButton || callButton.classList.contains("disabled")) {
+        event.preventDefault();
+        alert("Define primeiro um contacto de emergencia.");
+    }
+}
+
+function normalizePhone(phone) {
+    return String(phone).replace(/[^\d+]/g, "");
 }

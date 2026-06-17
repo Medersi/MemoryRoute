@@ -31,28 +31,38 @@ export const progressService = {
         const data = await this.getProgressData(userId);
         const alreadyUnlocked = new Set(data.userAchievements.map((item) => String(item.achievementId)));
         const newlyUnlocked = [];
-        let earnedCoins = 0;
+        let keepChecking = true;
 
-        for (const achievement of [...data.unlockedAchievements, ...data.lockedAchievements]) {
-            if (alreadyUnlocked.has(String(achievement.id))) continue;
-            if (!meetsCriteria(achievement.criteria, data)) continue;
+        while (keepChecking) {
+            keepChecking = false;
 
-            await apiService.createUserAchievement({
-                userId: String(userId),
-                achievementId: String(achievement.id),
-                unlockedAt: new Date().toISOString()
-            });
-            newlyUnlocked.push(achievement);
-            earnedCoins += getAchievementReward(achievement);
+            for (const achievement of [...data.unlockedAchievements, ...data.lockedAchievements]) {
+                if (alreadyUnlocked.has(String(achievement.id))) continue;
+                if (!meetsCriteria(achievement.criteria, data)) continue;
+
+                await apiService.createUserAchievement({
+                    userId: String(userId),
+                    achievementId: String(achievement.id),
+                    unlockedAt: new Date().toISOString()
+                });
+
+                alreadyUnlocked.add(String(achievement.id));
+                newlyUnlocked.push(achievement);
+
+                const reward = getAchievementReward(achievement);
+                if (reward > 0) {
+                    data.user.addCoins(reward);
+                    keepChecking = true;
+                }
+            }
         }
 
-        if (earnedCoins > 0) {
-            data.user.addCoins(earnedCoins);
-            storageService.saveAuthenticatedUser(data.user.toSessionData());
+        if (newlyUnlocked.length > 0) {
             await apiService.updateUser(data.user.id, {
                 coins: data.user.coins,
                 level: data.user.level
             });
+            storageService.saveAuthenticatedUser(data.user.toSessionData());
         }
 
         return newlyUnlocked;
@@ -84,7 +94,7 @@ function meetsCriteria(criteria, data) {
     return (values[criteria?.type] ?? 0) >= target;
 }
 
-function getAchievementReward(achievement) {
+export function getAchievementReward(achievement) {
     if (Number.isFinite(Number(achievement.coinReward))) {
         return Number(achievement.coinReward);
     }

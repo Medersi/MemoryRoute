@@ -42,13 +42,13 @@ export function setStepButtonsDisabled(disabled, canGoPrevious = false) {
     elements.previousButton.disabled = disabled || !canGoPrevious;
 }
 
-export function showCompletion(routeName, rewarded, achievementUnlocked) {
+export function showCompletion(routeName, rewardCoins, achievementUnlocked) {
     elements.routeTitle.textContent = routeName;
     elements.content.hidden = true;
     elements.success.hidden = false;
     document.querySelector("[data-success-title]").textContent = `${routeName} concluida!`;
-    document.querySelector("[data-success-reward]").textContent = rewarded
-        ? "Ganhaste 20 moedas de autonomia."
+    document.querySelector("[data-success-reward]").textContent = rewardCoins > 0
+        ? `Ganhaste ${rewardCoins} moedas de autonomia.`
         : "Esta rota ja tinha sido concluida por ti.";
     document.querySelector("[data-success-achievement]").hidden = !achievementUnlocked;
 }

@@ -3,7 +3,7 @@ import { RouteStep } from "../models/RouteStep.js";
 import { User } from "../models/User.js";
 import { apiService } from "../services/apiService.js";
 import { storageService } from "../services/storageService.js";
-import { progressService } from "../services/progressService.js";
+import { getAchievementReward, progressService } from "../services/progressService.js";
 import {
     clearExploreMessage,
     getExploreElements,
@@ -49,7 +49,7 @@ async function initialize() {
 
         const alreadyCompleted = route.completedBy.includes(String(sessionUser.id));
         if (alreadyCompleted && !repeatRoute) {
-            showCompletion(route.name, false, false);
+            showCompletion(route.name, 0, false);
             return;
         }
 
@@ -119,9 +119,11 @@ async function completeRoute() {
 
     storageService.saveAuthenticatedUser(user.toSessionData());
     const newlyUnlocked = await progressService.checkAndUnlockAchievements(user.id).catch(() => []);
+    const routeReward = rewarded ? 20 : 0;
+    const achievementReward = newlyUnlocked.reduce((total, achievement) => total + getAchievementReward(achievement), 0);
     const achievementUnlocked = newlyUnlocked.some((achievement) => achievement.name === "Primeira rota sozinho");
     window.history.replaceState(null, "", `explorar-rota.html?id=${encodeURIComponent(route.id)}`);
-    showCompletion(route.name, rewarded, achievementUnlocked);
+    showCompletion(route.name, routeReward + achievementReward, achievementUnlocked);
 }
 
 function requestHelp() {

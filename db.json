@@ -34,9 +34,12 @@
       "password": "123456",
       "role": "user",
       "coins": 85,
-      "level": 1,
+      "level": 2,
       "profilePhoto": null,
-      "emergencyContact": null,
+      "emergencyContact": {
+        "name": "Mae",
+        "phone": "912151310"
+      },
       "completedRouteIds": [
         "EgCzLTxYWiA"
       ],

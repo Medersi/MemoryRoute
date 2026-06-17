@@ -73,6 +73,26 @@
 }
 
 /* Formulário */
+.call-emergency-button {
+    display: inline-flex;
+    width: 100%;
+    min-height: 42px;
+    margin-top: 14px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #dc3545;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.call-emergency-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
 .edit-form {
     padding: 10px 20px 20px 20px;
     display: flex;
@@ -175,7 +195,8 @@
     }
 
     .input-group input,
-    .save-button {
+    .save-button,
+    .call-emergency-button {
         border-radius: 8px;
         font-size: 0.95rem;
     }

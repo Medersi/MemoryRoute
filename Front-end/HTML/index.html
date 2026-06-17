@@ -12,58 +12,123 @@
         
         <div class="scroll-content">
             
-            <header class="header-container">
-                <img src="logo.png" alt="MemoryRoute Logo" class="logo-small">
-                <div class="user-welcome">
-                    <div class="welcome-text">
-                        <h1 data-home-greeting>Olá</h1>
-                        <p>Vamos continuar o teu caminho de hoje?</p>
-                    </div>
-                    <span class="user-avatar avatar-fallback" data-home-avatar aria-label="Perfil do utilizador">A</span>
+            <header class="dashboard-hero">
+                <img src="logo.png" alt="MemoryRoute Logo" class="logo-small header-logo">
+                <div class="welcome-text">
+                    <h1 data-home-greeting>Olá</h1>
+                    <p>Vamos continuar o teu caminho de hoje?</p>
                 </div>
+                <span class="user-avatar avatar-fallback" data-home-avatar aria-label="Perfil do utilizador">A</span>
             </header>
 
-            <section class="quick-actions">
-                <a href="criar-rota.html" class="action-btn">
-                    <div class="action-icon green-icon">➕</div>
-                    <div class="action-text">
-                        <h3>Criar Caminho</h3>
-                        <p>Novo Percurso</p>
+            <section class="stats-grid" aria-label="Resumo do progresso">
+                <article class="stat-card">
+                    <span class="stat-icon coin-icon">●</span>
+                    <div>
+                        <p>Moedas</p>
+                        <strong data-home-coins>0</strong>
                     </div>
-                </a>
-                <a href="rotas.html" class="action-btn">
-                    <div class="action-icon blue-icon">🗺️</div>
-                    <div class="action-text">
-                        <h3>Minhas rotas</h3>
-                        <p>Ver todas</p>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon level-icon">★</span>
+                    <div>
+                        <p>Nível</p>
+                        <strong data-home-level>1</strong>
                     </div>
-                </a>
-                <a href="perfil.html" class="action-btn">
-                    <div class="action-icon orange-icon">❓</div>
-                    <div class="action-text">
-                        <h3>Ajuda</h3>
-                        <p>Dicas e suporte</p>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon route-icon-small">⌖</span>
+                    <div>
+                        <p>Rotas criadas</p>
+                        <strong data-home-created-routes>0</strong>
                     </div>
-                </a>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-icon done-icon">✓</span>
+                    <div>
+                        <p>Rotas concluídas</p>
+                        <strong data-home-completed-routes>0</strong>
+                    </div>
+                </article>
             </section>
 
-            <section class="emergency-section">
-                <div class="emergency-card">
-                    <div class="emergency-icon">📞</div>
-                    <div class="emergency-body">
-                        <p>Contacto de emergência</p>
-                        <button class="btn-emergency">Ligar a contacto de emergência</button>
+            <section class="dashboard-layout">
+                <section class="next-action-section" aria-labelledby="next-action-title">
+                    <p class="section-kicker">Próxima ação</p>
+                    <article class="primary-action-card">
+                        <div class="primary-action-content">
+                            <span class="action-icon green-icon">+</span>
+                            <div>
+                                <h2 id="next-action-title">Criar Caminho</h2>
+                                <p>Cria uma rota visual com fotografias e instruções simples.</p>
+                            </div>
+                        </div>
+                        <ul class="primary-action-list" aria-label="Elementos da rota">
+                            <li>Define origem e destino</li>
+                            <li>Adiciona passos com imagens</li>
+                            <li>Guarda para explorar depois</li>
+                        </ul>
+                        <a href="criar-rota.html" class="primary-action-link">Criar rota</a>
+                    </article>
+                </section>
+
+                <section class="home-routes-section" aria-labelledby="home-routes-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="section-kicker">Minhas rotas</p>
+                            <h2 id="home-routes-title">Rotas recentes</h2>
+                        </div>
+                        <a href="rotas.html">Ver todas</a>
                     </div>
+                    <div class="home-routes-list" data-home-routes-list>
+                        <p class="routes-message"></p>
+                    </div>
+                </section>
+            </section>
+
+            <section class="quick-access-section" aria-labelledby="quick-access-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-kicker">Acesso rápido</p>
+                        <h2 id="quick-access-title">Continua a explorar</h2>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <a href="rotas.html" class="action-btn">
+                        <span class="action-icon blue-icon">⌖</span>
+                        <span class="action-text">
+                            <strong>Rotas</strong>
+                            <small>Consulta e continua os teus caminhos.</small>
+                        </span>
+                    </a>
+                    <a href="conquistas.html" class="action-btn">
+                        <span class="action-icon orange-icon">★</span>
+                        <span class="action-text">
+                            <strong>Conquistas</strong>
+                            <small>Vê o teu progresso e recompensas.</small>
+                        </span>
+                    </a>
+                    <a href="perfil.html" class="action-btn">
+                        <span class="action-icon blue-icon">A</span>
+                        <span class="action-text">
+                            <strong>Perfil</strong>
+                            <small>Atualiza dados e contacto de emergência.</small>
+                        </span>
+                    </a>
                 </div>
             </section>
 
         </div>
 
         <nav class="bottom-nav" aria-label="Navegação principal">
-            <a href="index.html" class="nav-item active"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
-            <a href="rotas.html" class="nav-item"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
-            <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
-            <a href="perfil.html" class="nav-item"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+            <img src="logo.png" alt="MemoryRoute Logo" class="logo-small sidebar-logo">
+            <div class="nav-links">
+                <a href="index.html" class="nav-item active"><span class="nav-icon">⌂</span><span class="nav-label">Início</span></a>
+                <a href="rotas.html" class="nav-item"><span class="nav-icon">⌖</span><span class="nav-label">Rotas</span></a>
+                <a href="conquistas.html" class="nav-item"><span class="nav-icon">★</span><span class="nav-label">Conquistas</span></a>
+                <a href="perfil.html" class="nav-item"><span class="nav-avatar">A</span><span class="nav-label">Perfil</span></a>
+            </div>
+            <button type="button" class="logout-button" data-logout-button>Sair</button>
         </nav>
 
     </div>

@@ -12,14 +12,14 @@ if (storageService.hasSession()) {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         clearMessage(message);
-        setSubmitting(button, true, { loading: "A entrar...", idle: "Entrar" });
+        setSubmitting(button, true, "Entrar");
 
         try {
             await authService.login(form.email.value, form.password.value);
             window.location.replace("index.html");
         } catch (error) {
             showMessage(message, error.message);
-            setSubmitting(button, false, { loading: "A entrar...", idle: "Entrar" });
+            setSubmitting(button, false, "Entrar");
         }
     });
 }

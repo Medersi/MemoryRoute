@@ -14,11 +14,13 @@ const elements = {
 };
 
 export function renderStep(route, step, currentIndex, totalSteps, progress) {
+    elements.content.hidden = false;
+    elements.success.hidden = true;
     elements.routeTitle.textContent = route.name;
     elements.stepImage.src = step.image || "logo.png";
     elements.stepImage.alt = step.title || `Passo ${currentIndex + 1}`;
     elements.stepTitle.textContent = step.title || `Passo ${currentIndex + 1}`;
-    elements.instruction.textContent = step.instruction;
+    elements.instruction.textContent = step.instruction || "";
     elements.counter.textContent = `Passo ${currentIndex + 1} de ${totalSteps}`;
     elements.progress.style.width = `${progress}%`;
     elements.progress.parentElement.setAttribute("aria-valuenow", String(progress));
@@ -35,20 +37,19 @@ export function clearExploreMessage() {
     elements.message.hidden = true;
 }
 
-export function setStepButtonLoading(loading, canGoPrevious = false) {
-    elements.nextButton.disabled = loading;
-    elements.previousButton.disabled = loading || !canGoPrevious;
-    elements.nextButton.textContent = loading ? "A atualizar..." : "Já aqui estou";
+export function setStepButtonsDisabled(disabled, canGoPrevious = false) {
+    elements.nextButton.disabled = disabled;
+    elements.previousButton.disabled = disabled || !canGoPrevious;
 }
 
 export function showCompletion(routeName, rewarded, achievementUnlocked) {
     elements.routeTitle.textContent = routeName;
     elements.content.hidden = true;
     elements.success.hidden = false;
-    document.querySelector("[data-success-title]").textContent = `${routeName} concluída!`;
+    document.querySelector("[data-success-title]").textContent = `${routeName} concluida!`;
     document.querySelector("[data-success-reward]").textContent = rewarded
         ? "Ganhaste 20 moedas de autonomia."
-        : "Esta rota já tinha sido concluída por ti.";
+        : "Esta rota ja tinha sido concluida por ti.";
     document.querySelector("[data-success-achievement]").hidden = !achievementUnlocked;
 }
 

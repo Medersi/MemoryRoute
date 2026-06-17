@@ -13,7 +13,7 @@ export function renderProfile(user, progress = null) {
     setText("[data-profile-email]", user.email);
     setText("[data-profile-coins]", user.coins);
     setText("[data-profile-level]", progress?.level ?? user.level);
-    setText("[data-profile-avatar]", initials(user.name));
+    setProfileAvatar("[data-profile-avatar]", user);
     setText("[data-profile-completed]", progress?.completedRoutes.length ?? 0);
     setText("[data-profile-created]", progress?.routesCreated.length ?? 0);
     setText("[data-profile-achievements]", progress?.unlockedAchievements.length ?? 0);
@@ -28,4 +28,18 @@ export function renderProfile(user, progress = null) {
 function setText(selector, value) {
     const element = document.querySelector(selector);
     if (element) element.textContent = value;
+}
+
+function setProfileAvatar(selector, user) {
+    const element = document.querySelector(selector);
+    if (!element) return;
+
+    if (user.profilePhoto) {
+        element.innerHTML = `<img src="${user.profilePhoto}" alt="Foto de perfil">`;
+        element.classList.add("has-image");
+        return;
+    }
+
+    element.textContent = initials(user.name);
+    element.classList.remove("has-image");
 }

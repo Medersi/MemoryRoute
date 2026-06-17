@@ -17,6 +17,15 @@
             </header>
 
             <form id="form-dados-pessoais" class="edit-form">
+                <section class="profile-photo-editor" aria-label="Foto de perfil">
+                    <div class="profile-photo-preview" data-photo-preview>A</div>
+                    <div>
+                        <label for="input-profile-photo" class="photo-upload-button">Alterar foto</label>
+                        <input type="file" id="input-profile-photo" accept="image/*">
+                        <p>Escolhe uma imagem quadrada ou aproximada para ficar melhor no perfil.</p>
+                    </div>
+                </section>
+
                 <div class="input-group">
                     <label for="input-name">Nome completo</label>
                     <input type="text" id="input-name" required placeholder="O teu nome">
@@ -25,11 +34,6 @@
                 <div class="input-group">
                     <label for="input-email">Email</label>
                     <input type="email" id="input-email" required placeholder="O teu email">
-                </div>
-
-                <div class="input-group">
-                    <label for="input-password">Nova palavra-passe</label>
-                    <input type="password" id="input-password" placeholder="Deixa em branco para manter a atual">
                 </div>
 
                 <button type="submit" class="save-button">Guardar alterações</button>

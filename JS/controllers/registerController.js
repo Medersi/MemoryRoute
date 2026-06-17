@@ -8,7 +8,7 @@ const button = form.querySelector("button[type='submit']");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     clearMessage(message);
-    setSubmitting(button, true, { loading: "A criar...", idle: "Criar conta" });
+    setSubmitting(button, true, "Criar conta");
 
     try {
         await authService.register({
@@ -20,6 +20,6 @@ form.addEventListener("submit", async (event) => {
         setTimeout(() => window.location.replace("login.html"), 900);
     } catch (error) {
         showMessage(message, error.message);
-        setSubmitting(button, false, { loading: "A criar...", idle: "Criar conta" });
+        setSubmitting(button, false, "Criar conta");
     }
 });

@@ -12,16 +12,14 @@ export const progressService = {
             apiService.getFavoritesByUser(userId)
         ]);
 
-        const user = await getFreshUser();
+        const user = await getFreshUser(userId);
         const unlockedIds = new Set(userAchievements.map((item) => String(item.achievementId)));
-        const totalKilometers = completedRoutes.reduce((total, route) => total + (Number(route.distanceKm) || 0), 0);
 
         return {
             user,
-            level: user.calculateLevel(),
+            level: user.level ?? 1,
             routesCreated,
             completedRoutes,
-            totalKilometers,
             favorites,
             unlockedAchievements: achievements.filter((achievement) => unlockedIds.has(String(achievement.id))),
             lockedAchievements: achievements.filter((achievement) => !unlockedIds.has(String(achievement.id))),
@@ -33,6 +31,7 @@ export const progressService = {
         const data = await this.getProgressData(userId);
         const alreadyUnlocked = new Set(data.userAchievements.map((item) => String(item.achievementId)));
         const newlyUnlocked = [];
+        let earnedCoins = 0;
 
         for (const achievement of [...data.unlockedAchievements, ...data.lockedAchievements]) {
             if (alreadyUnlocked.has(String(achievement.id))) continue;
@@ -44,16 +43,33 @@ export const progressService = {
                 unlockedAt: new Date().toISOString()
             });
             newlyUnlocked.push(achievement);
+            earnedCoins += getAchievementReward(achievement);
+        }
+
+        if (earnedCoins > 0) {
+            data.user.addCoins(earnedCoins);
+            storageService.saveAuthenticatedUser(data.user.toSessionData());
+            await apiService.updateUser(data.user.id, {
+                coins: data.user.coins,
+                level: data.user.level
+            });
         }
 
         return newlyUnlocked;
     }
 };
 
-async function getFreshUser() {
+async function getFreshUser(userId) {
     const sessionUser = storageService.getAuthenticatedUser();
-    const userData = await apiService.getUserByEmail(sessionUser.email);
+    const userData = await apiService.getUserById(userId ?? sessionUser.id);
     const user = new User(userData);
+
+    const calculatedLevel = user.calculateLevel();
+    if (user.level !== calculatedLevel) {
+        user.level = calculatedLevel;
+        await apiService.updateUser(user.id, { level: user.level });
+    }
+
     storageService.saveAuthenticatedUser(user.toSessionData());
     return user;
 }
@@ -66,4 +82,21 @@ function meetsCriteria(criteria, data) {
         coins: data.user.coins
     };
     return (values[criteria?.type] ?? 0) >= target;
+}
+
+function getAchievementReward(achievement) {
+    if (Number.isFinite(Number(achievement.coinReward))) {
+        return Number(achievement.coinReward);
+    }
+
+    const rewards = {
+        "achievement-first-route": 20,
+        "achievement-neighborhood-explorer": 50,
+        "achievement-path-creator": 15,
+        "achievement-active-tutor": 30,
+        "achievement-100-coins": 20,
+        "achievement-200-coins": 40
+    };
+
+    return rewards[achievement.id] ?? 10;
 }

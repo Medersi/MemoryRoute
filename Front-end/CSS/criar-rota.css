@@ -226,3 +226,98 @@ textarea {
     color: #68737e;
     text-decoration: none;
 }
+
+@media (min-width: 768px) {
+    .phone-canvas {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 0;
+        background: #eef3f8;
+        box-shadow: none;
+    }
+
+    .builder-content {
+        max-width: 1120px;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: visible;
+        margin: 0 auto;
+        padding: 48px 56px;
+    }
+
+    .builder-header {
+        margin-bottom: 28px;
+    }
+
+    .builder-header h1 {
+        font-size: 2rem;
+    }
+
+    .back-button,
+    .builder-section,
+    .step-builder-card {
+        border-radius: 8px;
+    }
+
+    .builder-section {
+        padding: 24px;
+        box-shadow: 0 8px 22px rgba(31, 57, 83, 0.06);
+    }
+
+    .builder-section h2 {
+        font-size: 1.18rem;
+    }
+
+    .field-label {
+        font-size: 0.82rem;
+    }
+
+    input,
+    textarea,
+    select {
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+    .two-fields {
+        gap: 14px;
+    }
+
+    .main-image-picker {
+        height: 220px;
+        border-radius: 8px;
+    }
+
+    #steps-container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .step-builder-card {
+        margin-top: 0;
+        padding: 16px;
+    }
+
+    .step-image-picker {
+        height: 190px;
+        border-radius: 8px;
+    }
+
+    .form-actions {
+        max-width: 520px;
+        margin-left: auto;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .save-route-button,
+    .cancel-button,
+    .add-step-button {
+        border-radius: 8px;
+        font-size: 0.88rem;
+    }
+}

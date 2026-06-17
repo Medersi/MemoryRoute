@@ -121,3 +121,62 @@
 .save-button:hover {
     background-color: #bd2130;
 }
+
+@media (min-width: 768px) {
+    .sub-header {
+        justify-content: flex-start;
+        max-width: 680px;
+        min-height: auto;
+        margin: 0 auto 22px;
+        padding: 0;
+        border-bottom: 0;
+    }
+
+    .back-button {
+        position: static;
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border: 1px solid #ffd6d6;
+        border-radius: 8px;
+        background: #fff3f3;
+        font-size: 0.86rem;
+    }
+
+    .sub-header h1 {
+        max-width: none;
+        margin: 0 0 0 16px;
+        text-align: left;
+        font-size: 2rem;
+    }
+
+    .current-contact-card,
+    .edit-form {
+        max-width: 680px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 8px 22px rgba(31, 57, 83, 0.06);
+    }
+
+    .current-contact-card {
+        margin-bottom: 18px;
+    }
+
+    .edit-form {
+        padding: 24px;
+        border: 1px solid #e4ebf3;
+    }
+
+    .edit-form h2 {
+        font-size: 0.88rem;
+    }
+
+    .input-group input,
+    .save-button {
+        border-radius: 8px;
+        font-size: 0.95rem;
+    }
+}

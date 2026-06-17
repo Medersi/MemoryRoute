@@ -152,7 +152,7 @@
 }
 
 .complete-step-button:disabled {
-    cursor: wait;
+    cursor: not-allowed;
     opacity: 0.7;
 }
 
@@ -223,4 +223,94 @@
 .success-secondary {
     border: 1px solid #dfe6ec;
     color: #65717c;
+}
+
+@media (min-width: 768px) {
+    .phone-canvas {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        border-radius: 0;
+        background: #eef3f8;
+        box-shadow: none;
+    }
+
+    .explore-content {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 48px 56px;
+    }
+
+    .explore-header {
+        margin-bottom: 28px;
+    }
+
+    .explore-header h1 {
+        font-size: 2rem;
+    }
+
+    .back-button,
+    .step-image-wrapper,
+    .instruction-card,
+    .success-card {
+        border-radius: 8px;
+    }
+
+    #explore-content {
+        display: grid;
+        grid-template-columns: minmax(420px, 1.1fr) minmax(320px, 0.9fr);
+        gap: 22px;
+        align-items: start;
+    }
+
+    .step-image-wrapper {
+        height: 520px;
+        margin-bottom: 0;
+        grid-row: span 4;
+        box-shadow: 0 8px 22px rgba(31, 57, 83, 0.06);
+    }
+
+    .step-image {
+        width: 86%;
+        max-height: 86%;
+    }
+
+    .step-progress-row,
+    .explore-progress,
+    .instruction-card,
+    .explore-message,
+    .explore-actions {
+        grid-column: 2;
+    }
+
+    .instruction-card {
+        padding: 24px;
+    }
+
+    .instruction-card h2 {
+        font-size: 1.45rem;
+    }
+
+    .instruction-card p {
+        font-size: 1rem;
+    }
+
+    .explore-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .complete-step-button,
+    .previous-step-button,
+    .help-button,
+    .success-primary,
+    .success-secondary {
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+    .success-card {
+        max-width: 620px;
+        margin: 80px auto 0;
+    }
 }

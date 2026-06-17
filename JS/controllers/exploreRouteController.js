@@ -8,7 +8,7 @@ import {
     clearExploreMessage,
     getExploreElements,
     renderStep,
-    setStepButtonLoading,
+    setStepButtonsDisabled,
     showCompletion,
     showExploreMessage
 } from "../views/exploreRouteView.js";
@@ -53,13 +53,7 @@ async function initialize() {
             return;
         }
 
-        if (repeatRoute && steps.every((step) => step.completed)) {
-            steps.forEach((step) => step.reset());
-            await Promise.all(steps.map((step) => apiService.updateRouteStep(step.id, { completed: false })));
-        }
-
-        const firstIncompleteStep = steps.findIndex((step) => !step.completed);
-        currentIndex = firstIncompleteStep === -1 ? steps.length - 1 : firstIncompleteStep;
+        currentIndex = 0;
         renderCurrentStep();
     } catch {
         showExploreMessage("Não foi possível carregar esta rota. Confirma se o servidor está ativo.", "error");
@@ -68,7 +62,7 @@ async function initialize() {
 }
 
 function renderCurrentStep() {
-    const progress = route.calculateProgress(steps);
+    const progress = Math.round((currentIndex / steps.length) * 100);
     renderStep(route, steps[currentIndex], currentIndex, steps.length, progress);
 }
 
@@ -83,12 +77,9 @@ async function completeCurrentStep() {
     if (isProcessing) return;
     isProcessing = true;
     clearExploreMessage();
-    setStepButtonLoading(true, currentIndex > 0);
+    setStepButtonsDisabled(true, currentIndex > 0);
 
     try {
-        const step = steps[currentIndex].markCompleted();
-        await apiService.updateRouteStep(step.id, { completed: true });
-
         if (currentIndex < steps.length - 1) {
             currentIndex += 1;
             renderCurrentStep();
@@ -100,12 +91,12 @@ async function completeCurrentStep() {
         showExploreMessage("Não foi possível atualizar o progresso. Tenta novamente.", "error");
     } finally {
         isProcessing = false;
-        setStepButtonLoading(false, currentIndex > 0);
+        setStepButtonsDisabled(false, currentIndex > 0);
     }
 }
 
 async function completeRoute() {
-    const freshUserData = await apiService.getUserByEmail(sessionUser.email);
+    const freshUserData = await apiService.getUserById(sessionUser.id);
     const user = new User(freshUserData);
     const userId = String(user.id);
     const rewarded = !route.completedBy.includes(userId);
@@ -121,6 +112,7 @@ async function completeRoute() {
         }),
         apiService.updateUser(user.id, {
             coins: user.coins,
+            level: user.level,
             completedRouteIds: user.completedRouteIds
         })
     ]);

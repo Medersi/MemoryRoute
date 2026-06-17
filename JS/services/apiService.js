@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:3000";
+// Usa o mesmo host da pagina para funcionar no PC e no telemovel pela rede local.
+const API_URL = `http://${window.location.hostname}:3000`;
 
 async function request(endpoint, options = {}) {
     const response = await fetch(`${API_URL}${endpoint}`, {
@@ -15,6 +16,8 @@ async function request(endpoint, options = {}) {
 
 export const apiService = {
     getUsers: () => request("/users"),
+
+    getUserById: (id) => request(`/users/${encodeURIComponent(id)}`),
 
     async getUserByEmail(email) {
         const users = await request(`/users?email=${encodeURIComponent(email.trim().toLowerCase())}`);

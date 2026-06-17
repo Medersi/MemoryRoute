@@ -7,6 +7,7 @@ export class User {
         role = "user",
         coins = 0,
         level = 1,
+        profilePhoto = null,
         emergencyContact = null,
         completedRouteIds = [],
         createdAt = new Date().toISOString()
@@ -18,6 +19,7 @@ export class User {
         this.role = role;
         this.coins = coins;
         this.level = level;
+        this.profilePhoto = profilePhoto;
         this.emergencyContact = emergencyContact;
         this.completedRouteIds = completedRouteIds.map(String);
         this.createdAt = createdAt;
@@ -28,7 +30,10 @@ export class User {
     }
 
     addCoins(amount) {
-        if (amount > 0) this.coins += amount;
+        if (amount > 0) {
+            this.coins += amount;
+            this.updateLevel();
+        }
         return this.coins;
     }
 
@@ -38,6 +43,11 @@ export class User {
         if (this.coins >= 100) return 3;
         if (this.coins >= 50) return 2;
         return 1;
+    }
+
+    updateLevel() {
+        this.level = this.calculateLevel();
+        return this.level;
     }
 
     isAdmin() {

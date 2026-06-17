@@ -9,7 +9,7 @@ export function clearMessage(element) {
     element.hidden = true;
 }
 
-export function setSubmitting(button, submitting, labels) {
+export function setSubmitting(button, submitting, label) {
     button.disabled = submitting;
-    button.textContent = submitting ? labels.loading : labels.idle;
+    button.textContent = label;
 }

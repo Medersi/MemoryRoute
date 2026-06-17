@@ -125,14 +125,6 @@
     font-weight: 800;
 }
 
-.route-distance {
-    padding: 4px 8px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.78);
-    font-size: 0.66rem;
-    font-weight: 800;
-}
-
 .blue-visual { background: #dff1ff; color: #1e90ff; }
 .green-visual { background: #e4f7e8; color: #3aa75b; }
 .orange-visual { background: #fff0d8; color: #ed9a21; }
@@ -304,4 +296,82 @@
     color: #7f8994;
     font-size: 0.72rem;
     text-align: center;
+}
+
+@media (min-width: 768px) {
+    .title-row {
+        align-items: flex-start;
+    }
+
+    .add-route {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+    }
+
+    .summary-card {
+        max-width: 560px;
+        margin-bottom: 24px;
+        padding: 18px;
+        border-radius: 8px;
+    }
+
+    .filter-list {
+        margin-bottom: 24px;
+        overflow: visible;
+    }
+
+    .filter {
+        border-radius: 8px;
+        font-size: 0.82rem;
+    }
+
+    #routes-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .route-card {
+        min-height: 180px;
+        margin-bottom: 0;
+        border-radius: 8px;
+        box-shadow: 0 8px 22px rgba(31, 57, 83, 0.06);
+    }
+
+    .route-visual {
+        min-width: 120px;
+    }
+
+    .route-details {
+        padding: 18px;
+    }
+
+    .route-details h3 {
+        font-size: 1.05rem;
+    }
+
+    .route-details p {
+        font-size: 0.82rem;
+        line-height: 1.4;
+    }
+
+    .route-start-button,
+    .edit-route-button,
+    .delete-route-button {
+        border-radius: 8px;
+        font-size: 0.72rem;
+    }
+
+    .routes-message {
+        grid-column: 1 / -1;
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    #routes-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }

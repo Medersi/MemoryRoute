@@ -6,7 +6,6 @@ export class Route {
         destination = "",
         description = "",
         mainImage = "",
-        distanceKm = 0,
         durationMinutes = 0,
         difficulty = "fácil",
         ownerId = null,
@@ -17,7 +16,7 @@ export class Route {
     }) {
         Object.assign(this, {
             id, name, origin, destination, description, mainImage,
-            distanceKm, durationMinutes, difficulty, ownerId, createdBy,
+            durationMinutes, difficulty, ownerId, createdBy,
             userId, status, completedBy
         });
     }
